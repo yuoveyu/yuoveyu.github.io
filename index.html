@@ -5,17 +5,17 @@
   
 
   
-  <title>Hexo</title>
+  <title>余坚的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:title" content="余坚的blog">
+<meta property="og:url" content="http://yuoveyu.github.io/index.html">
+<meta property="og:site_name" content="余坚的blog">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="余坚的blog">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="余坚的blog" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -34,7 +34,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">余坚的blog</a>
       </h1>
       
     </div>
@@ -54,13 +54,145 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yuoveyu.github.io"></form>
       </div>
     </div>
   </div>
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-shell/tomcat-start-end" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/04/shell/tomcat-start-end/" class="article-date">
+  <time datetime="2018-06-04T07:52:13.669Z" itemprop="datePublished">2018-06-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/shell/">shell</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/04/shell/tomcat-start-end/">tomcat自动启停脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>开发环境tomcat下经常重新部署,需要关闭tomcat进程,判断是否关闭成功,配置文件替换,图片备份,再启动tomcat.<br>通过ps和awk命令,可以把关闭和启动tomcat命令都集成到一个脚本中,一键部署更新.<br>以下是一个真实列子:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">app=<span class="string">'/home/poc/tomcat'</span></span><br><span class="line">info=ps aux | grep <span class="string">"<span class="variable">$&#123;app&#125;</span>"</span> | grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$info</span>"</span> ]; <span class="keyword">then</span> </span><br><span class="line"><span class="built_in">echo</span> <span class="string">'is not running and start tomcat'</span></span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line"><span class="built_in">echo</span> <span class="string">'is also running and stopping'</span></span><br><span class="line">    /home/poc/tomcat/bin/shutdown.sh </span><br><span class="line">    sleep 1 </span><br><span class="line">    info=ps aux | grep <span class="string">"<span class="variable">$&#123;app&#125;</span>"</span> | grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span> </span><br><span class="line">    <span class="keyword">if</span> [ -z <span class="string">"info"</span>];<span class="keyword">then</span> </span><br><span class="line">        <span class="built_in">echo</span> <span class="string">'starttomcat…'</span> </span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="built_in">kill</span> −9 info </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">'kill tomcat'</span></span><br><span class="line">    <span class="keyword">fi</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span> </span><br><span class="line"><span class="built_in">cd</span> /home/poc/tomcat/webapps </span><br><span class="line">rm -rf /home/poc/identityPic </span><br><span class="line"><span class="built_in">echo</span> <span class="string">'备份图片'</span></span><br><span class="line">cp /home/poc/tomcat/webapps/ar/identityPic ~ -R </span><br><span class="line">rm -rf ar* </span><br><span class="line">mkdir ar </span><br><span class="line">cp ~/ar.war ar/ </span><br><span class="line"><span class="built_in">cd</span> ar </span><br><span class="line">rm -rf identityPic </span><br><span class="line">jar xvf ar.war </span><br><span class="line">rm -rf ar.war </span><br><span class="line">cp ~/config/config.properties WEB-INF/classes/tinyConf </span><br><span class="line">cp ~/config/db.properties WEB-INF/classes/tinyConf </span><br><span class="line">cp /home/poc/identityPic /home/poc/tomcat/webapps/ar/ -R </span><br><span class="line"><span class="built_in">echo</span> <span class="string">'start tomcat'</span></span><br><span class="line">/home/poc/tomcat/bin/startup.sh</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yuoveyu.github.io/2018/06/04/shell/tomcat-start-end/" data-id="cjhzynxb90002zkggyiv44y8y" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomcat/">tomcat</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java/java" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/04/java/java/" class="article-date">
+  <time datetime="2018-06-04T07:49:44.865Z" itemprop="datePublished">2018-06-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/04/java/java/">JAVA</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yuoveyu.github.io/2018/06/04/java/java/" data-id="cjhzynxbc0003zkggcffiwhdu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-tools/find-jar-by-class" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/04/tools/find-jar-by-class/" class="article-date">
+  <time datetime="2018-06-04T07:46:28.676Z" itemprop="datePublished">2018-06-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/tools/">tools</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/04/tools/find-jar-by-class/">从jar中查找class</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="代码-bin-findjar-py"><a href="#代码-bin-findjar-py" class="headerlink" title="代码:bin_findjar.py"></a>代码:bin_findjar.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python  </span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-  </span></span><br><span class="line"><span class="comment">#######################################  </span></span><br><span class="line"><span class="comment">#参数1  jar的路径  </span></span><br><span class="line"><span class="comment">#参数2  class的关键字  </span></span><br><span class="line"><span class="comment">########################################  </span></span><br><span class="line"><span class="keyword">import</span> os  </span><br><span class="line"><span class="keyword">import</span> sys  </span><br><span class="line">path=<span class="string">""</span>  </span><br><span class="line"><span class="keyword">if</span> len(sys.argv)&gt;= <span class="number">3</span>:  </span><br><span class="line">    path=sys.argv[<span class="number">1</span>]  </span><br><span class="line">    value=sys.argv[<span class="number">2</span>].strip()  </span><br><span class="line"><span class="keyword">else</span>:  </span><br><span class="line">    <span class="keyword">print</span> <span class="string">"参数有误。。。"</span>  </span><br><span class="line">    sys.exit()  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">for</span> d <span class="keyword">in</span> os.listdir(path):  </span><br><span class="line">    <span class="keyword">if</span> d.endswith(<span class="string">"jar"</span>):  </span><br><span class="line">        <span class="comment">#print "unzip -l "+ path+"/"+d+" | grep "+value  </span></span><br><span class="line">        pipe=os.popen(<span class="string">"unzip -l "</span>+ path+<span class="string">"/"</span>+d+<span class="string">" | grep "</span>+value)  </span><br><span class="line">        string= pipe.read()  </span><br><span class="line">        pipe.close()  </span><br><span class="line">        <span class="keyword">if</span> len(string)&lt;=<span class="number">0</span>:  </span><br><span class="line">            <span class="keyword">pass</span>  </span><br><span class="line">        <span class="keyword">else</span>:  </span><br><span class="line">            <span class="keyword">print</span> <span class="string">"path:"</span>+d  </span><br><span class="line">            <span class="keyword">print</span> string  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">else</span>:  </span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h2><pre><code class="bash">./bin_findjar.py ~/.m2/repository/org/yu/util/yuutil/1.0/ DbHelper
+      817  06-29-2017 19:59   org/yu/util/db/DbHelper<span class="variable">$1</span>.class
+     4758  06-29-2017 19:59   org/yu/util/db/DbHelper.class
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yuoveyu.github.io/2018/06/04/tools/find-jar-by-class/" data-id="cjhzynxbg0006zkggzmvk0wi2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -97,7 +229,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/04/hello-world/" data-id="cjhzx9rik0000f2gg98vp9xqy" class="article-share-link">Share</a>
+      <a data-url="http://yuoveyu.github.io/2018/06/04/hello-world/" data-id="cjhzynxat0001zkgghb99h7on" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,12 +246,33 @@
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/shell/">shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tools/">tools</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -136,6 +289,18 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/06/04/shell/tomcat-start-end/">tomcat自动启停脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/04/java/java/">JAVA</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/04/tools/find-jar-by-class/">从jar中查找class</a>
+          </li>
         
           <li>
             <a href="/2018/06/04/hello-world/">Hello World</a>
