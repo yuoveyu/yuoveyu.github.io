@@ -2,21 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yuoveyu.github.io/2018/06/04/vscode/vscode-notepad/</loc>
+    <loc>http://yuoveyu.github.io/2018/06/04/script/golang-notepad/</loc>
     
     <lastmod>2018-06-04T13:46:35.174Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yuoveyu.github.io/2018/06/04/html/vue-notepad/</loc>
-    
-    <lastmod>2018-06-04T13:46:35.174Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yuoveyu.github.io/2018/06/04/java/jvm-notepad/</loc>
+    <loc>http://yuoveyu.github.io/2018/06/04/html/css-notepad/</loc>
     
     <lastmod>2018-06-04T13:46:35.174Z</lastmod>
     
@@ -24,6 +17,13 @@
   
   <url>
     <loc>http://yuoveyu.github.io/2018/06/04/java/java/</loc>
+    
+    <lastmod>2018-06-04T13:46:35.174Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yuoveyu.github.io/2018/06/04/java/jvm-notepad/</loc>
     
     <lastmod>2018-06-04T13:46:35.174Z</lastmod>
     
@@ -65,20 +65,6 @@
   </url>
   
   <url>
-    <loc>http://yuoveyu.github.io/2018/06/04/toolsCode/find-jar-by-class/</loc>
-    
-    <lastmod>2018-06-04T13:46:35.174Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yuoveyu.github.io/2018/06/04/html/css-notepad/</loc>
-    
-    <lastmod>2018-06-04T13:46:35.174Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yuoveyu.github.io/2018/06/04/script/go-string/</loc>
     
     <lastmod>2018-06-04T13:46:35.174Z</lastmod>
@@ -86,7 +72,7 @@
   </url>
   
   <url>
-    <loc>http://yuoveyu.github.io/2018/06/04/script/golang-notepad/</loc>
+    <loc>http://yuoveyu.github.io/2018/06/04/html/vue-notepad/</loc>
     
     <lastmod>2018-06-04T13:46:35.174Z</lastmod>
     
@@ -128,7 +114,21 @@
   </url>
   
   <url>
+    <loc>http://yuoveyu.github.io/2018/06/04/toolsCode/find-jar-by-class/</loc>
+    
+    <lastmod>2018-06-04T13:46:35.174Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yuoveyu.github.io/2018/06/04/tools/vi-notepad/</loc>
+    
+    <lastmod>2018-06-04T13:46:35.174Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yuoveyu.github.io/2018/06/04/vscode/vscode-notepad/</loc>
     
     <lastmod>2018-06-04T13:46:35.174Z</lastmod>
     
