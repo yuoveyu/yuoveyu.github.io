@@ -3,10 +3,10 @@
   
     
     <entry>
-      <title>JAVA</title>
+      <title>java</title>
       <link href="/2018/06/05/java/java/"/>
       <url>/2018/06/05/java/java/</url>
-      <content type="html"><![CDATA[]]></content>
+      <content type="html"><![CDATA[<p>test blog</p>]]></content>
       
       <categories>
           
@@ -24,23 +24,134 @@
     </entry>
     
     <entry>
-      <title>tomcat自动启停脚本</title>
-      <link href="/2018/06/01/shell/tomcat-start-end/"/>
-      <url>/2018/06/01/shell/tomcat-start-end/</url>
-      <content type="html"><![CDATA[<p>开发环境tomcat下经常重新部署,需要关闭tomcat进程,判断是否关闭成功,配置文件替换,图片备份,再启动tomcat.<br>通过ps和awk命令,可以把关闭和启动tomcat命令都集成到一个脚本中,一键部署更新.<br>以下是一个真实列子:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">app=<span class="string">'/home/poc/tomcat'</span></span><br><span class="line">info=ps aux | grep <span class="string">"<span class="variable">$&#123;app&#125;</span>"</span> | grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$info</span>"</span> ]; <span class="keyword">then</span> </span><br><span class="line"><span class="built_in">echo</span> <span class="string">'is not running and start tomcat'</span></span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line"><span class="built_in">echo</span> <span class="string">'is also running and stopping'</span></span><br><span class="line">    /home/poc/tomcat/bin/shutdown.sh </span><br><span class="line">    sleep 1 </span><br><span class="line">    info=ps aux | grep <span class="string">"<span class="variable">$&#123;app&#125;</span>"</span> | grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span> </span><br><span class="line">    <span class="keyword">if</span> [ -z <span class="string">"info"</span>];<span class="keyword">then</span> </span><br><span class="line">        <span class="built_in">echo</span> <span class="string">'starttomcat…'</span> </span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="built_in">kill</span> −9 info </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">'kill tomcat'</span></span><br><span class="line">    <span class="keyword">fi</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span> </span><br><span class="line"><span class="built_in">cd</span> /home/poc/tomcat/webapps </span><br><span class="line">rm -rf /home/poc/identityPic </span><br><span class="line"><span class="built_in">echo</span> <span class="string">'备份图片'</span></span><br><span class="line">cp /home/poc/tomcat/webapps/ar/identityPic ~ -R </span><br><span class="line">rm -rf ar* </span><br><span class="line">mkdir ar </span><br><span class="line">cp ~/ar.war ar/ </span><br><span class="line"><span class="built_in">cd</span> ar </span><br><span class="line">rm -rf identityPic </span><br><span class="line">jar xvf ar.war </span><br><span class="line">rm -rf ar.war </span><br><span class="line">cp ~/config/config.properties WEB-INF/classes/tinyConf </span><br><span class="line">cp ~/config/db.properties WEB-INF/classes/tinyConf </span><br><span class="line">cp /home/poc/identityPic /home/poc/tomcat/webapps/ar/ -R </span><br><span class="line"><span class="built_in">echo</span> <span class="string">'start tomcat'</span></span><br><span class="line">/home/poc/tomcat/bin/startup.sh</span><br></pre></td></tr></table></figure>]]></content>
+      <title>webpack学习笔记</title>
+      <link href="/2018/06/05/html/webpack-notepad/"/>
+      <url>/2018/06/05/html/webpack-notepad/</url>
+      <content type="html"><![CDATA[<h3 id="要引入css"><a href="#要引入css" class="headerlink" title="要引入css"></a>要引入css</h3><p>//通过 CommonJS 规范导入 CSS 模块<br>require(‘./main.css’);</p><h3 id="安装引入的css相关Loader"><a href="#安装引入的css相关Loader" class="headerlink" title="安装引入的css相关Loader"></a>安装引入的css相关Loader</h3><p>npm i -D style-loader css-loader</p><h3 id="引入js和css例子"><a href="#引入js和css例子" class="headerlink" title="引入js和css例子"></a>引入js和css例子</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// JavaScript 执行入口文件</span></span><br><span class="line">  entry: <span class="string">'./main.js'</span>,</span><br><span class="line">  output: &#123;</span><br><span class="line">    <span class="comment">// 把所有依赖的模块合并输出到一个 bundle.js 文件</span></span><br><span class="line">    filename: <span class="string">'bundle.js'</span>,</span><br><span class="line">    <span class="comment">// 输出文件都放到 dist 目录下</span></span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'./dist'</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// 用正则去匹配要用该 loader 转换的 CSS 文件</span></span><br><span class="line">        test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        use: [<span class="string">'style-loader'</span>, <span class="string">'css-loader?minimize'</span>],</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="Loader-传入属性的方式除了有-querystring-外，还可以通过-Object-传入"><a href="#Loader-传入属性的方式除了有-querystring-外，还可以通过-Object-传入" class="headerlink" title="Loader 传入属性的方式除了有 querystring 外，还可以通过 Object 传入"></a>Loader 传入属性的方式除了有 querystring 外，还可以通过 Object 传入</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">use: [</span><br><span class="line">  <span class="string">'style-loader'</span>, </span><br><span class="line">  &#123;</span><br><span class="line">    loader:<span class="string">'css-loader'</span>,</span><br><span class="line">    options:&#123;</span><br><span class="line">      minimize:<span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><h3 id="直接js中require"><a href="#直接js中require" class="headerlink" title="直接js中require"></a>直接js中require</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'style-loader!css-loader?minimize!./main.css'</span>);</span><br></pre></td></tr></table></figure><p>其中用!分割多个loader</p><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>npm i -D extract-text-webpack-plugin</p><h3 id="使用插件示例"><a href="#使用插件示例" class="headerlink" title="使用插件示例"></a>使用插件示例</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> ExtractTextPlugin = <span class="built_in">require</span>(<span class="string">'extract-text-webpack-plugin'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// JavaScript 执行入口文件</span></span><br><span class="line">  entry: <span class="string">'./main.js'</span>,</span><br><span class="line">  output: &#123;</span><br><span class="line">    <span class="comment">// 把所有依赖的模块合并输出到一个 bundle.js 文件</span></span><br><span class="line">    filename: <span class="string">'bundle.js'</span>,</span><br><span class="line">    <span class="comment">// 把输出文件都放到 dist 目录下</span></span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'./dist'</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// 用正则去匹配要用该 loader 转换的 CSS 文件</span></span><br><span class="line">        test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">          <span class="comment">// 转换 .css 文件需要使用的 Loader</span></span><br><span class="line">          use: [<span class="string">'css-loader'</span>],</span><br><span class="line">        &#125;),</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> ExtractTextPlugin(&#123;</span><br><span class="line">      <span class="comment">// 从 .js 文件中提取出来的 .css 文件的名称</span></span><br><span class="line">      filename: <span class="string">`[name]_[contenthash:8].css`</span>,</span><br><span class="line">    &#125;),</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>main.js还是要require css,不然webpack不会去处理css</p><h3 id="继续集成-DevServer"><a href="#继续集成-DevServer" class="headerlink" title="继续集成 DevServer"></a>继续集成 DevServer</h3><p>npm i -D webpack-dev-server<br>安装成功后执行 webpack-dev-server 命令， DevServer 就启动了</p><p>如果报错误<br>TypeError: Cannot read property ‘compile’ of undefined</p><p>webpack-dev-server如果是3.x的话，webpack必须是4.x才不会报此TypeError: Cannot read property ‘compile’ of undefined错误, 同理如果webpack是3.x，则webpack-dev-server必须是2.x</p><h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><ul><li>Entry：入口，Webpack 执行构建的第一步将从 Entry 开始，可抽象成输入。</li><li>Module：模块，在 Webpack 里一切皆模块，一个模块对应着一个文件。Webpack 会从配置的 Entry 开始递归找出所有依赖的模块。</li><li>Chunk：代码块，一个 Chunk 由多个模块组合而成，用于代码合并与分割。</li><li>Loader：模块转换器，用于把模块原内容按照需求转换成新内容。</li><li>Plugin：扩展插件，在 Webpack 构建流程中的特定时机注入扩展逻辑来改变构建结果或做你想要的事情。</li><li>Output：输出结果，在 Webpack 经过一系列处理并得出最终想要的代码后输出结果。</li></ul><p>Webpack 启动后会从 Entry 里配置的 Module 开始递归解析 Entry 依赖的所有 Module。 每找到一个 Module， 就会根据配置的 Loader 去找出对应的转换规则，对 Module 进行转换后，再解析出当前 Module 依赖的 Module。 这些模块会以 Entry 为单位进行分组，一个 Entry 和其所有依赖的 Module 被分到一个组也就是一个 Chunk。最后 Webpack 会把所有 Chunk 转换成文件输出。 在整个流程中 Webpack 会在恰当的时机执行 Plugin 里定义的逻辑。</p>]]></content>
       
       <categories>
           
-          <category> shell </category>
+          <category> html </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> shell </tag>
+            <tag> html </tag>
             
-            <tag> tomcat </tag>
+            <tag> webpack </tag>
+            
+            <tag> 打包 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>linux-tar</title>
+      <link href="/2018/06/01/linux/linux-tar/"/>
+      <url>/2018/06/01/linux/linux-tar/</url>
+      <content type="html"><![CDATA[<p>linux 解压</p><h3 id="tar"><a href="#tar" class="headerlink" title=".tar"></a>.tar</h3><p>解包： tar xvf FileName.tar<br>打包：tar cvf FileName.tar DirName</p><h3 id="gz"><a href="#gz" class="headerlink" title=".gz"></a>.gz</h3><p>解压1：gunzip FileName.gz<br>解压2：gzip -d FileName.gz<br>压缩：gzip FileName<br>.tar.gz 和 .tgz<br>解压：tar zxvf FileName.tar.gz<br>压缩：tar zcvf FileName.tar.gz DirName</p><h3 id="bz2"><a href="#bz2" class="headerlink" title=".bz2"></a>.bz2</h3><p>解压1：bzip2 -d FileName.bz2<br>解压2：bunzip2 FileName.bz2<br>压缩： bzip2 -z FileName<br>.tar.bz2<br>解压：tar jxvf FileName.tar.bz2<br>压缩：tar jcvf FileName.tar.bz2 DirName</p><h3 id="bz"><a href="#bz" class="headerlink" title=".bz"></a>.bz</h3><p>解压1：bzip2 -d FileName.bz<br>解压2：bunzip2 FileName.bz<br>压缩：未知<br>.tar.bz<br>解压：tar jxvf FileName.tar.bz<br>压缩：未知</p><h3 id="Z"><a href="#Z" class="headerlink" title=".Z"></a>.Z</h3><p>解压：uncompress FileName.Z<br>压缩：compress FileName<br>.tar.Z<br>解压：tar Zxvf FileName.tar.Z<br>压缩：tar Zcvf FileName.tar.Z DirName</p><h3 id="zip"><a href="#zip" class="headerlink" title=".zip"></a>.zip</h3><p>解压：unzip FileName.zip</p><h2 id="压缩：zip-r-FileName-zip-DirName"><a href="#压缩：zip-r-FileName-zip-DirName" class="headerlink" title="压缩：zip -r FileName.zip DirName"></a>压缩：zip -r FileName.zip DirName</h2><p>.rar<br>解压：rar a FileName.rar</p><h2 id="压缩：rar-e-FileName-rar"><a href="#压缩：rar-e-FileName-rar" class="headerlink" title="压缩：rar e FileName.rar"></a>压缩：rar e FileName.rar</h2><p>.7z<br>解压: 7z x FileName.7z</p><h2 id="压缩："><a href="#压缩：" class="headerlink" title="压缩："></a>压缩：</h2><h3 id="打包和切割"><a href="#打包和切割" class="headerlink" title="打包和切割"></a>打包和切割</h3><p>要将目录logs打包压缩并分割成多个1M的文件，可以用下面的命令：<br>tar cjf - logs/ |split -b 1m - logs.tar.bz2.<br>完成后会产生下列文件：<br>logs.tar.bz2.aa, logs.tar.bz2.ab, logs.tar.bz2.ac<br>要解压的时候只要执行下面的命令就可以了：<br>cat logs.tar.bz2.a* | tar jxv</p><h3 id="加密和解压"><a href="#加密和解压" class="headerlink" title="加密和解压"></a>加密和解压</h3><p>zip -e yu.zip yu/<br>接着提示输入2次密码</p><p>unzip yu.zip<br>接着会提示输入密码</p><h3 id="排除目录"><a href="#排除目录" class="headerlink" title="排除目录"></a>排除目录</h3><p>tar cfz hosteguide.com.tar.gz –exclude=/var/www/hosteguide.com/files/dontneed /var/www/hosteguide.com </p>]]></content>
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> tar </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>vue学习笔记</title>
+      <link href="/2018/06/01/html/vue-notepad/"/>
+      <url>/2018/06/01/html/vue-notepad/</url>
+      <content type="html"><![CDATA[<h3 id="v-bind-缩写"><a href="#v-bind-缩写" class="headerlink" title="v-bind 缩写"></a>v-bind 缩写</h3><pre><code>* &lt;!-- 完整语法 --&gt;* &lt;a v-bind:href=&quot;url&quot;&gt;&lt;/a&gt;* &lt;!-- 缩写 --&gt;* &lt;a :href=&quot;url&quot;&gt;&lt;/a&gt;</code></pre><h3 id="v-on-缩写"><a href="#v-on-缩写" class="headerlink" title="v-on 缩写"></a>v-on 缩写</h3><pre><code>* &lt;!-- 完整语法 --&gt;* &lt;a v-on:click=&quot;doSomething&quot;&gt;&lt;/a&gt;* &lt;!-- 缩写 --&gt;* &lt;a @click=&quot;doSomething&quot;&gt;&lt;/a&gt;</code></pre><h6 id="当你在一个定制的组件上用到-class-属性的时候，这些类将被添加到根元素上面，这个元素上已经存在的类不会被覆盖。"><a href="#当你在一个定制的组件上用到-class-属性的时候，这些类将被添加到根元素上面，这个元素上已经存在的类不会被覆盖。" class="headerlink" title="当你在一个定制的组件上用到 class 属性的时候，这些类将被添加到根元素上面，这个元素上已经存在的类不会被覆盖。"></a>当你在一个定制的组件上用到 class 属性的时候，这些类将被添加到根元素上面，这个元素上已经存在的类不会被覆盖。</h6>]]></content>
+      
+      <categories>
+          
+          <category> html </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> html </tag>
+            
+            <tag> vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>开源框架</title>
+      <link href="/2018/06/01/open-frame/"/>
+      <url>/2018/06/01/open-frame/</url>
+      <content type="html"><![CDATA[<h2 id="js框架"><a href="#js框架" class="headerlink" title="js框架"></a>js框架</h2><table><thead><tr><th>框架名称</th><th style="text-align:center">介绍</th><th style="text-align:right">备注 </th></tr></thead><tbody><tr><td>prettify.js</td><td style="text-align:center">支持页面语法着亮</td><td style="text-align:right">- </td></tr><tr><td>babel</td><td style="text-align:center">javascript编译器</td><td style="text-align:right"><a href="https://babeljs.io" target="_blank" rel="noopener">官网</a></td></tr></tbody></table><h2 id="python框架"><a href="#python框架" class="headerlink" title="python框架"></a>python框架</h2><table><thead><tr><th>框架名称</th><th style="text-align:center">介绍</th><th style="text-align:right">备注 </th></tr></thead><tbody><tr><td>django</td><td style="text-align:center">python的web开发框架</td><td style="text-align:right"><a href="http://www.djangoproject.com/" target="_blank" rel="noopener">官网</a></td></tr></tbody></table>]]></content>
+      
+      <categories>
+          
+          <category> 开源 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> frame </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>看过的书</title>
+      <link href="/2018/06/01/read-book/"/>
+      <url>/2018/06/01/read-book/</url>
+      <content type="html"><![CDATA[<h3 id="大话设计模式"><a href="#大话设计模式" class="headerlink" title="大话设计模式"></a>大话设计模式</h3><p>非常不错，我的设计模式就是靠这本书入的门,讲的非常浅显易懂.<br>值得购买，和多看几遍;</p><h3 id="web安全"><a href="#web安全" class="headerlink" title="web安全"></a>web安全</h3><p>我的安全知识入门;</p><h3 id="java夜未眠"><a href="#java夜未眠" class="headerlink" title="java夜未眠"></a>java夜未眠</h3><p>可以扩展些知识，读起来也很轻松;</p><h3 id="think-in-java"><a href="#think-in-java" class="headerlink" title="think in java"></a>think in java</h3><p>看过好几遍，不建议入门看这本，当初刚学ｊａｖａ，看这本书，还是很受打击的．<br>后面每次翻这本书，总有新的收获；</p><h3 id="c程序设计语言（第2版）"><a href="#c程序设计语言（第2版）" class="headerlink" title="c程序设计语言（第2版）"></a>c程序设计语言（第2版）</h3><p>相见恨晚，早期学c就能看这本书该有多好，<br>很多疑问都可以在该书找到解答。</p><h3 id="深入浅出-Webpack"><a href="#深入浅出-Webpack" class="headerlink" title="深入浅出 Webpack"></a>深入浅出 Webpack</h3><p>还不错,跟着一步步学,能很好的上手webpack,<br>通过实例才能感受,为什么都是模块,都是js文件.</p>]]></content>
+      
+      <categories>
+          
+          <category> 杂谈 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> book </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>nginx编译安装</title>
+      <link href="/2018/06/01/install/install-nginx/"/>
+      <url>/2018/06/01/install/install-nginx/</url>
+      <content type="html"><![CDATA[<p>nginx编译安装</p><p>安装nginx之前需要安装相关组件</p><h3 id="openssl安装"><a href="#openssl安装" class="headerlink" title="openssl安装"></a>openssl安装</h3><p>1.官网下载安装包</p><ol start="2"><li>tar zxvf openssl-fips-2.0.10.tar.gz</li><li>cd openssl-fips-2.0.10</li><li>./config </li><li>make &amp;&amp; make install</li></ol><h3 id="pcre安装"><a href="#pcre安装" class="headerlink" title="pcre安装"></a>pcre安装</h3><p>1.官网下载安装包</p><ol start="2"><li>tar zxvf pcre-8.40.tar.gz</li><li>cd pcre-8.40</li><li>./configure </li><li>make &amp;&amp; make install</li></ol><h3 id="zlib安装"><a href="#zlib安装" class="headerlink" title="zlib安装"></a>zlib安装</h3><ol><li>官网下载安装包</li><li>tar zxvf zlib-1.2.11.tar.gz</li><li>cd zlib-1.2.11</li><li>./configure</li><li>make &amp;&amp; make install</li></ol><h3 id="安装openssl"><a href="#安装openssl" class="headerlink" title="安装openssl"></a>安装openssl</h3><p>cd openssl-1.0.2l<br>./config –prefix=/usr/local/openssl<br>make &amp;&amp; make install</p><p>cd nginx-1.10.3/auto/lib/openssl/conf</p><p>CORE_INCS=”$CORE_INCS $OPENSSL/.openssl/include”<br>CORE_DEPS=”$CORE_DEPS $OPENSSL/.openssl/include/openssl/ssl.h”<br>CORE_LIBS=”$CORE_LIBS $OPENSSL/.openssl/lib/libssl.a”<br>CORE_LIBS=”$CORE_LIBS $OPENSSL/.openssl/lib/libcrypto.a”<br>CORE_LIBS=”$CORE_LIBS $NGX_LIBDL”<br>修改成以下代码：</p><p>CORE_INCS=”$CORE_INCS $OPENSSL/include”<br>CORE_DEPS=”$CORE_DEPS $OPENSSL/include/openssl/ssl.h”<br>CORE_LIBS=”$CORE_LIBS $OPENSSL/lib/libssl.a”<br>CORE_LIBS=”$CORE_LIBS $OPENSSL/lib/libcrypto.a”<br>CORE_LIBS=”$CORE_LIBS $NGX_LIBDL”</p><h3 id="最后安装nignx"><a href="#最后安装nignx" class="headerlink" title="最后安装nignx"></a>最后安装nignx</h3><ol><li>官网下载安装包</li><li>tar zxvf nginx-1.10.3.tar.gz</li><li>cd nginx-1.10.3</li><li>./configure  –with-http_stub_status_module –with-http_ssl_module –with-ssl=/usr/local/openssl</li><li>make &amp;&amp; make install</li></ol><h3 id="配置nginx"><a href="#配置nginx" class="headerlink" title="配置nginx"></a>配置nginx</h3><p>配置请求从nginx转发到tomcat<br>vi nginx.conf<br>在server {节点里面增加配置:<br>location  /应用名/ {<br>       proxy_set_header Host $host;<br>       proxy_pass http://对应ip:对应端口/应用名/;<br>}</p><p>重启nginx,让配置生效</p><p>nginx实现tcp反向代理</p><p>下载tcp模块源码<br>git clone <a href="https://github.com/yaoweibin/nginx_tcp_proxy_module.git" target="_blank" rel="noopener">https://github.com/yaoweibin/nginx_tcp_proxy_module.git</a></p><p>给nginx源码打patch<br>cd nginx-1.10.3<br>patch -p1 &lt; ../nginx_tcp_proxy_module/tcp.patch</p><p>./configure  –add-module=../nginx_tcp_proxy_module –prefix=/usr/local/nginx –with-openssl=/usr/local/openssl<br>make &amp;&amp; sudo make install</p><ol start="4"><li>root用户/root/.bash_profile文件中增加<br>export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH<br>再执行命令source /root/.bash_profile</li></ol><p>5.cd /usr/local/nginx<br>增加配置vi conf/nginx.conf</p><p>tcp{<br>     upstream cluster {<br>             server xx.xx.x1:5222;<br>     }<br>     server{<br>             listen 5000;<br>             proxy_pass cluster;<br>     }<br>}<br>tcp 和 http是平级的</p><p>客户端直接访问nginx服务器的ip:5222</p><p>nginx -s reload  ：修改配置后重新加载生效<br>nginx 启动<br>nginx -s stop 关闭</p><p>stream {<br>  upstream backend {<br>    hash $remote_addr consistent;<br>    server 10.25.0.141:5222 weight=5;<br>    server 10.25.0.141:5222      max_fails=3 fail_timeout=30s;<br>    server unix:/tmp/backend3;<br>  }<br>  server {<br>    listen 8111;<br>    proxy_connect_timeout 1s;<br>    proxy_timeout 3s;<br>    proxy_pass backend;<br>  }<br>  server {<br>    listen [::1]:8111;<br>    proxy_pass unix:/tmp/stream.socket;<br>  }<br>}</p><p>stream{<br>    upstream backend{<br>        hash $remote_addr consistent;<br>        server 10.25.0.141:5222 max_fails=3 fail_timeout=10s;<br>    }<br>    server{<br>        listen 8112;<br>        proxy_connect_timeout 20s;<br>        proxy_timeout 5m;<br>        proxy_pass backend;<br>    }<br>}</p>]]></content>
+      
+      <categories>
+          
+          <category> nginx </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nginx </tag>
             
         </tags>
       
@@ -116,29 +227,6 @@
     </entry>
     
     <entry>
-      <title>fedora学习笔记</title>
-      <link href="/2018/06/01/linux/fedora-notepad/"/>
-      <url>/2018/06/01/linux/fedora-notepad/</url>
-      <content type="html"><![CDATA[<p>@yum自动补全<br>安装sudo yum install bash-completion.noarch<br>在/etc/bash下添加<br>if [ -f /etc/bash_completion ]; then<br>. /etc/bash_completion<br>fi</p><p>@fedora 修改为中文<br>vi /etc/sysconfig/i18n<br>内容：<br>LANG=”zh_CN.UTF-8”<br>SYSFONT=”latarcyrheb-sun16”</p><p>@配置开机启动服务<br>/sbin/c httpd on [设置apahce服务器httpd服务开机启动]<br>/sbin/chkconfig –add mysqld [在服务清单中添加mysql服务]<br>/sbin/chkconfig mysqld on             [设置mysql服务开机启动]</p><p>/sbin/service httpd start [启动httpd服务,与开机启动无关]<br>/sbin/service mysqld start [启动mysql服务,与开机无关]</p><p>@fedora 无法播放mp3 mp3解码器无法下载<br><a href="http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm" target="_blank" rel="noopener">http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm</a><br>下载这个包，安装之后就能搜到解码器了。</p><p>@service 方式<br>开启： service iptables start<br>关闭： service iptables stop</p><p>@用户添加sudo权限;<br>我们vi /etc/sudoers<br>我们要让某用户拥有root所有权限： yuyu ALL=(ALL)ALL    （这句意思是 yuyu 用户 在所有主机中 拥有所有root用户命令权限）</p><p>su root<br>visudo命令，<br>将83 行%wheel ALL=(ALL) ALL的注释去掉（注意，后面没有NOPASSWORD），<br>然后，把你当前的用户添加到wheel的用户组（编辑/etc/group文件，在wheel后面加上你的用户名，用“,”隔开），ok，<br>这样你就可以用sudo执行任何root的命令了，当然，你得知道root的密码，<br>不要密码就在最后一个ALL后面加上一个NOPASSWORD（不推荐）。</p><p>注：添加用户到组<br>usermod -g  wheel yuyu</p><p>rpm -q python<br>查看Python是否安装,安装的版本是多少?</p>]]></content>
-      
-      <categories>
-          
-          <category> linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> linux </tag>
-            
-            <tag> fedora </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
       <title>linux下常用命令</title>
       <link href="/2018/06/01/linux/linux-commands/"/>
       <url>/2018/06/01/linux/linux-commands/</url>
@@ -162,6 +250,52 @@
     </entry>
     
     <entry>
+      <title>curl使用</title>
+      <link href="/2018/06/01/linux/linux-curl/"/>
+      <url>/2018/06/01/linux/linux-curl/</url>
+      <content type="html"><![CDATA[<h3 id="请求头信息"><a href="#请求头信息" class="headerlink" title="请求头信息"></a>请求头信息</h3><p>curl URL -H ‘Content-Type:application/json’</p><h3 id="携带请求参数"><a href="#携带请求参数" class="headerlink" title="携带请求参数"></a>携带请求参数</h3><p>curl URL -d “pa1=1&amp;pa2=2”</p><h3 id="urlencode"><a href="#urlencode" class="headerlink" title="urlencode"></a>urlencode</h3><p>curl URL –data-urlencode “pa1=这个&amp;pa2=哈哈”</p><p>###　返回http头信息<br>curl -i URL  </p><h3 id="访问https网站"><a href="#访问https网站" class="headerlink" title="访问https网站"></a>访问https网站</h3><p>curl  –insecure URL </p>]]></content>
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> curl </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>fedora学习笔记</title>
+      <link href="/2018/06/01/linux/fedora-notepad/"/>
+      <url>/2018/06/01/linux/fedora-notepad/</url>
+      <content type="html"><![CDATA[<p>@yum自动补全<br>安装sudo yum install bash-completion.noarch<br>在/etc/bash下添加<br>if [ -f /etc/bash_completion ]; then<br>. /etc/bash_completion<br>fi</p><p>@fedora 修改为中文<br>vi /etc/sysconfig/i18n<br>内容：<br>LANG=”zh_CN.UTF-8”<br>SYSFONT=”latarcyrheb-sun16”</p><p>@配置开机启动服务<br>/sbin/c httpd on [设置apahce服务器httpd服务开机启动]<br>/sbin/chkconfig –add mysqld [在服务清单中添加mysql服务]<br>/sbin/chkconfig mysqld on             [设置mysql服务开机启动]</p><p>/sbin/service httpd start [启动httpd服务,与开机启动无关]<br>/sbin/service mysqld start [启动mysql服务,与开机无关]</p><p>@fedora 无法播放mp3 mp3解码器无法下载<br><a href="http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm" target="_blank" rel="noopener">http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm</a><br>下载这个包，安装之后就能搜到解码器了。</p><p>@service 方式<br>开启： service iptables start<br>关闭： service iptables stop</p><p>@用户添加sudo权限;<br>我们vi /etc/sudoers<br>我们要让某用户拥有root所有权限： yuyu ALL=(ALL)ALL    （这句意思是 yuyu 用户 在所有主机中 拥有所有root用户命令权限）</p><p>su root<br>visudo命令，<br>将83 行%wheel ALL=(ALL) ALL的注释去掉（注意，后面没有NOPASSWORD），<br>然后，把你当前的用户添加到wheel的用户组（编辑/etc/group文件，在wheel后面加上你的用户名，用“,”隔开），ok，<br>这样你就可以用sudo执行任何root的命令了，当然，你得知道root的密码，<br>不要密码就在最后一个ALL后面加上一个NOPASSWORD（不推荐）。</p><p>注：添加用户到组<br>usermod -g  wheel yuyu</p><p>rpm -q python<br>查看Python是否安装,安装的版本是多少?</p>]]></content>
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> fedora </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>linux下刻录镜像</title>
       <link href="/2018/06/01/linux/linux-record/"/>
       <url>/2018/06/01/linux/linux-record/</url>
@@ -177,6 +311,71 @@
         <tags>
             
             <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>linux-find</title>
+      <link href="/2018/06/01/linux/linux-find/"/>
+      <url>/2018/06/01/linux/linux-find/</url>
+      <content type="html"><![CDATA[<p>linux命令–find</p><h3 id="列出目录下所有的文件"><a href="#列出目录下所有的文件" class="headerlink" title="列出目录下所有的文件"></a>列出目录下所有的文件</h3><p>find dir </p><p>-path 以整体的路径进行匹配  -name则以文件名进行匹配<br>-iname 忽略大小写<br>! -name  反义</p><h3 id="当前目录下查找更改时间在5日以内的文件，可以用："><a href="#当前目录下查找更改时间在5日以内的文件，可以用：" class="headerlink" title="当前目录下查找更改时间在5日以内的文件，可以用："></a>当前目录下查找更改时间在5日以内的文件，可以用：</h3><p>find . -mtime -5 -print  +5则是5日以前</p><h3 id="或者5分钟内"><a href="#或者5分钟内" class="headerlink" title="或者5分钟内"></a>或者5分钟内</h3><p>find . -mmin -5 -print   +5则是超过5分钟</p><h3 id="时间戳概念-newer"><a href="#时间戳概念-newer" class="headerlink" title="时间戳概念 -newer"></a>时间戳概念 -newer</h3><p>find . -type f -newer file.txt -print<br>比file.txt这个参考文件更新的所有文件。</p><h3 id="当前目录下查找所有的目录，可以用："><a href="#当前目录下查找所有的目录，可以用：" class="headerlink" title="当前目录下查找所有的目录，可以用："></a>当前目录下查找所有的目录，可以用：</h3><p>find . -type d -print </p><h3 id="为了在当前目录下查找除目录以外的所有类型的文件，可以用："><a href="#为了在当前目录下查找除目录以外的所有类型的文件，可以用：" class="headerlink" title="为了在当前目录下查找除目录以外的所有类型的文件，可以用："></a>为了在当前目录下查找除目录以外的所有类型的文件，可以用：</h3><p>find . ! -type d -print </p><h3 id="当前目录下查找所有的符号链接文件，可以用："><a href="#当前目录下查找所有的符号链接文件，可以用：" class="headerlink" title="当前目录下查找所有的符号链接文件，可以用："></a>当前目录下查找所有的符号链接文件，可以用：</h3><p>find . -type l -print </p><h3 id="想要在当前目录及子目录中查找文件名以一个大写字母开头的文件"><a href="#想要在当前目录及子目录中查找文件名以一个大写字母开头的文件" class="headerlink" title="想要在当前目录及子目录中查找文件名以一个大写字母开头的文件"></a>想要在当前目录及子目录中查找文件名以一个大写字母开头的文件</h3><p>find . -name “[A-Z]*” -print   </p><h3 id="执行命令exec"><a href="#执行命令exec" class="headerlink" title="执行命令exec"></a>执行命令exec</h3><p>计算当前目录下各文件的大小<br>find . -type f -exec du -h {} \;</p><h3 id="查询大于100M的文件"><a href="#查询大于100M的文件" class="headerlink" title="查询大于100M的文件"></a>查询大于100M的文件</h3><p>find . -size +100M  </p><h3 id="查找文件内容"><a href="#查找文件内容" class="headerlink" title="查找文件内容"></a>查找文件内容</h3><p>find . -type f -name “*.java” |xargs -n 10 grep ‘new RpcResult(new RuntimeException’ -l</p><p>find . -type f -name “*.ts” |xargs -n 10 grep ‘registerDocumentLinkProvider’ -l</p>]]></content>
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> find </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>开源软件</title>
+      <link href="/2018/06/01/open-soft/"/>
+      <url>/2018/06/01/open-soft/</url>
+      <content type="html"><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><table><thead><tr><th>框架名称</th><th style="text-align:center">介绍</th><th style="text-align:right">备注 </th></tr></thead><tbody><tr><td>sts</td><td style="text-align:center">基于 nodejs 的静态服务器</td><td style="text-align:right">“npm install -g sts ; cd webroot-dev ; sts 19091”</td></tr><tr><td>iterm2</td><td style="text-align:center">终端工具　</td><td style="text-align:right">mac下用这个代替系统自带的</td></tr></tbody></table>]]></content>
+      
+      <categories>
+          
+          <category> 开源 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> soft </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>mac下常用命令</title>
+      <link href="/2018/06/01/linux/mac-commands/"/>
+      <url>/2018/06/01/linux/mac-commands/</url>
+      <content type="html"><![CDATA[<h3 id="打开当前目录"><a href="#打开当前目录" class="headerlink" title="打开当前目录"></a>打开当前目录</h3><p>open . </p><h3 id="iterm屏幕切分"><a href="#iterm屏幕切分" class="headerlink" title="iterm屏幕切分"></a>iterm屏幕切分</h3><p>cmd + d  水平分屏幕<br>cmd + shift + d 垂直分屏幕</p><h3 id="pbcopy-和-pbpaste"><a href="#pbcopy-和-pbpaste" class="headerlink" title="pbcopy 和 pbpaste"></a>pbcopy 和 pbpaste</h3><p>ls ~|pbcopy<br>pbcopy &lt; blogpost.txt<br>pbpaste &gt;&gt; tasklist.txt</p><h3 id="mdfind"><a href="#mdfind" class="headerlink" title="mdfind"></a>mdfind</h3><p>-onlyin选项可以约束搜索范围为一个目录：<br>mdfind -onlyin ~/Documents essay</p><h3 id="screencapture命令可以截图"><a href="#screencapture命令可以截图" class="headerlink" title="screencapture命令可以截图"></a>screencapture命令可以截图</h3><p>抓取包含鼠标光标的全屏幕，并以image.png插入到新邮件的附件中：<br>screencapture -C -M image.png<br>用鼠标选择抓取窗口（及阴影）并复制到剪贴板：<br>screencapture -c -W<br>延时10秒后抓屏，并在Preview中打开之：<br>全选复制放进笔记<br>screencapture -T 10 -P image.png<br>用鼠标截取一个矩形区域，抓取后存为pdf文件：<br>全选复制放进笔记<br>screencapture -s -t pdf image.pd</p><h3 id="launchctl"><a href="#launchctl" class="headerlink" title="launchctl"></a>launchctl</h3><p>launchctl管理OS X的启动脚本，控制启动计算机时需要开启的服务。也可以设置定时执行特定任务的脚本，就像Linux cron一样。</p><p>例如，开机时自动启动Apache服务器：<br>sudo launchctl load -w /System/Library/LaunchDaemons/org.apache.httpd.plist<br>运行launchctl list显示当前的启动脚本。sudo launchctl unload [path/to/script]停止正在运行的启动脚本，再加上-w选项即可去除开机启动。用这个方法可以一次去除Adobe或Microsoft Office所附带的所有“自动更新”后台程序。</p><p>Launchd脚本存储在以下位置：<br>~/Library/LaunchAgents<br>/Library/LaunchAgents<br>/Library/LaunchDaemons<br>/System/Library/LaunchAgents<br>/System/Library/LaunchDaemons</p><h3 id="say"><a href="#say" class="headerlink" title="say"></a>say</h3><p>say是一个文本转语音（TTS）的有趣的工具，引擎和OS X使用的一样也是VoiceOver。如果不加其他选项，则会简单的语音朗读你给定的字符串：</p><p>$ say “Never trust a computer you can’t lift.”<br>用-f选项朗读特定文本文件，-o选项将朗读结果存为音频文件而不是播放：</p><p>全选复制放进笔记$ say -f mynovel.txt -o myaudiobook.aiff<br>say命令可以用于在脚本中播放警告或提示。例如你可以设置Automator或Hazel脚本处理文件，并在任务完成时用say命令语音提示。</p><h3 id="刷新签名"><a href="#刷新签名" class="headerlink" title="刷新签名"></a>刷新签名</h3><p>xattr -rc .<br>sudo codesign -fs - /Applications/Utilities/Boot\ Camp\ Assistant.app<br>检查下签名是否完整好用，如果正确，没任何输出；<br>codesign –verify ~/Desktop/TestWidget.app </p>]]></content>
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mac </tag>
             
         </tags>
       
@@ -206,21 +405,21 @@
     </entry>
     
     <entry>
-      <title>go-string</title>
-      <link href="/2018/06/01/script/go-string/"/>
-      <url>/2018/06/01/script/go-string/</url>
-      <content type="html"><![CDATA[<p>go语言字符串操作</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> str <span class="keyword">string</span> = <span class="string">"Hello,World"</span></span><br><span class="line"><span class="comment">//1.获取字符串的第一个字母</span></span><br><span class="line">fmt.Printf(<span class="string">"1.获取字符串的第一个字母:%c\n"</span>, str[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.获取字符串的第二和第三个字母</span></span><br><span class="line">fmt.Printf(<span class="string">"2.获取字符串的第二和第三个字母:%s\n"</span>, str[<span class="number">1</span>:<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">//3.获取字符串的最后一个字母</span></span><br><span class="line">fmt.Printf(<span class="string">"3.获取字符串的最后一个字母:%c\n"</span>, str[<span class="built_in">len</span>(str)<span class="number">-1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">//4.字符串开头字母判断</span></span><br><span class="line"><span class="keyword">if</span> str[:<span class="number">5</span>] == <span class="string">"Hello"</span> &#123;</span><br><span class="line">fmt.Printf(<span class="string">"4.字符串开头字母比较:以Hello开头\n"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//5.字符串结尾字母判断</span></span><br><span class="line"><span class="keyword">if</span> str[<span class="built_in">len</span>(str)<span class="number">-5</span>:<span class="built_in">len</span>(str)] == <span class="string">"World"</span> &#123;</span><br><span class="line">fmt.Printf(<span class="string">"5.字符串结尾字母比较:以World结尾\n"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//6.获取字符串长度</span></span><br><span class="line">fmt.Printf(<span class="string">"6.获取字符串长度:%d\n"</span>, <span class="built_in">len</span>(str))</span><br><span class="line"></span><br><span class="line"><span class="comment">/*//7.大小写转换</span></span><br><span class="line"><span class="comment">System.out.println("7.大小写转换:"+str.toUpperCase()+","+str.toLowerCase());</span></span><br><span class="line"><span class="comment">//8.字符串转int,int转字符串</span></span><br><span class="line"><span class="comment">System.out.println("8.字符串转int,int转字符串:"+Integer.parseInt("100")+","+String.valueOf(100));</span></span><br><span class="line"><span class="comment">//9.分割字符串</span></span><br><span class="line"><span class="comment">String[] strs = str.split(",");</span></span><br><span class="line"><span class="comment">System.out.println("9.分割字符串:"+"["+strs[0]+","+strs[1]+"]");</span></span><br><span class="line"><span class="comment">//10.判断字符串是否包含</span></span><br><span class="line"><span class="comment">if(str.contains("o,W"))&#123;</span></span><br><span class="line"><span class="comment">System.out.println("10.分割字符串:包含o,W");</span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <title>cpp-string</title>
+      <link href="/2018/06/01/script/cpp-string/"/>
+      <url>/2018/06/01/script/cpp-string/</url>
+      <content type="html"><![CDATA[<p>c++语言字符串操作</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; split(<span class="keyword">const</span> <span class="built_in">string</span>&amp; src, <span class="keyword">const</span> <span class="built_in">string</span> sp) ;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">str</span><span class="params">(<span class="string">"Hello,World"</span>)</span></span>;</span><br><span class="line"><span class="comment">//1.获取字符串的第一个字母</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"1.获取字符串的第一个字母:"</span> + str.substr(<span class="number">0</span>, <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//2.获取字符串的第二和第三个字母</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"2.获取字符串的第二和第三个字母:"</span> + str.substr(<span class="number">1</span>, <span class="number">2</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//3.获取字符串的最后一个字母</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"3.获取字符串的最后一个字母:"</span> + str.substr(str.length() - <span class="number">1</span>, <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//4.字符串开头字母判断</span></span><br><span class="line"><span class="keyword">if</span> (str.find(<span class="string">"Hello"</span>) == <span class="number">0</span>) &#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"4.字符串开头字母比较:以Hello开头"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//5.字符串结尾字母判断</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">w</span><span class="params">(<span class="string">"World"</span>)</span></span>;</span><br><span class="line"><span class="keyword">if</span> (str.rfind(w) == str.length() - w.length()) &#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"5.字符串结尾字母比较:以World结尾"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//6.获取字符串长度</span></span><br><span class="line"><span class="built_in">stringstream</span> ss;</span><br><span class="line">ss &lt;&lt; str.length();</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"6.获取字符串长度:"</span> + ss.str() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//7.大小写转换</span></span><br><span class="line">transform(str.begin(), str.end(), str.begin(), ::<span class="built_in">toupper</span>);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"7.大小写转换:"</span> + str;</span><br><span class="line">transform(str.begin(), str.end(), str.begin(), ::<span class="built_in">tolower</span>);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">","</span> + str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//8.字符串转int,int转字符串</span></span><br><span class="line"><span class="keyword">int</span> num;</span><br><span class="line"><span class="function"><span class="built_in">stringstream</span> <span class="title">ss2</span><span class="params">(<span class="string">"100"</span>)</span></span>;</span><br><span class="line">ss2 &gt;&gt; num;</span><br><span class="line"><span class="built_in">stringstream</span> ss3;</span><br><span class="line">ss3 &lt;&lt; num;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"8.字符串转int,int转字符串:"</span> + ss3.str() + <span class="string">","</span> + ss3.str() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//9.分割字符串</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; strs = ::split(str,<span class="built_in">string</span>(<span class="string">","</span>));</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"9.分割字符串:["</span> + strs[<span class="number">0</span>] +<span class="string">","</span>+strs[<span class="number">1</span>]&lt;&lt;<span class="string">"]"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//10.判断字符串是否包含</span></span><br><span class="line">str=<span class="string">"Hello,World"</span>;</span><br><span class="line"><span class="keyword">if</span> (str.find(<span class="string">"o,W"</span>)!=<span class="number">-1</span>) &#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"10.分割字符串:包含o,W"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; split(<span class="keyword">const</span> <span class="built_in">string</span>&amp; src, <span class="built_in">string</span> sp) &#123;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; strs;</span><br><span class="line"><span class="keyword">int</span> sp_len = sp.size();</span><br><span class="line"><span class="keyword">int</span> position = <span class="number">0</span>, index = <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="number">-1</span> != (index = src.find(sp, position))) &#123;</span><br><span class="line">strs.push_back(src.substr(position, index - position));</span><br><span class="line">position = index + sp_len;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">string</span> lastStr = src.substr(position);</span><br><span class="line"><span class="keyword">if</span> (!lastStr.empty())</span><br><span class="line">strs.push_back(lastStr);</span><br><span class="line"><span class="keyword">return</span> strs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       
       <categories>
           
-          <category> go </category>
+          <category> cpp </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> go </tag>
+            <tag> cpp </tag>
             
             <tag> string </tag>
             
@@ -243,11 +442,11 @@
       
         <tags>
             
-            <tag> go </tag>
-            
             <tag> 程序语言 </tag>
             
             <tag> golang </tag>
+            
+            <tag> go </tag>
             
         </tags>
       
@@ -280,7 +479,30 @@
       <title>makefile学习笔记</title>
       <link href="/2018/06/01/script/makefile-notepad/"/>
       <url>/2018/06/01/script/makefile-notepad/</url>
-      <content type="html"><![CDATA[<p>gnu-make学习 </p><h3 id="在makefile中的命令，必须要以【Tab】-键开始"><a href="#在makefile中的命令，必须要以【Tab】-键开始" class="headerlink" title="在makefile中的命令，必须要以【Tab】 键开始"></a>在makefile中的命令，必须要以【Tab】 键开始</h3><h3 id="make命令会在当前目录顺序找寻”GNUmakefile”-”makefile”-”Makefile”文件，"><a href="#make命令会在当前目录顺序找寻”GNUmakefile”-”makefile”-”Makefile”文件，" class="headerlink" title="make命令会在当前目录顺序找寻”GNUmakefile”,”makefile”,”Makefile”文件，"></a>make命令会在当前目录顺序找寻”GNUmakefile”,”makefile”,”Makefile”文件，</h3><p>如果要制定文件，加 -f 或者 –file参数  如make -f Make.Linux </p><h3 id="其中的foo-c可以省略-gcc也可以省略-make会自动推导"><a href="#其中的foo-c可以省略-gcc也可以省略-make会自动推导" class="headerlink" title="其中的foo.c可以省略,gcc也可以省略, make会自动推导"></a>其中的foo.c可以省略,gcc也可以省略, make会自动推导</h3><p>foo.o : foo.c defs.h<br>    gcc -c -g foo.c</p><h3 id="如果命令太长可以使用反斜框’-’作为换行符"><a href="#如果命令太长可以使用反斜框’-’作为换行符" class="headerlink" title="如果命令太长可以使用反斜框’\’作为换行符"></a>如果命令太长可以使用反斜框’\’作为换行符</h3><h3 id="objects-wildcard-o-objects-代表所有-o文件的集合"><a href="#objects-wildcard-o-objects-代表所有-o文件的集合" class="headerlink" title="objects := $(wildcard *.o)   # objects 代表所有.o文件的集合"></a>objects := $(wildcard *.o)   # objects 代表所有.o文件的集合</h3><h3 id="VPATH变量"><a href="#VPATH变量" class="headerlink" title="VPATH变量"></a>VPATH变量</h3><p>make在当前的目录中找寻依赖文件和目标文件，如果找不到并且定义了VPATH变量，make会在值目录下去寻找文件<br>VPATH = src:src/test </p><h3 id="PHONY显示指明一个目标是伪目标"><a href="#PHONY显示指明一个目标是伪目标" class="headerlink" title=".PHONY显示指明一个目标是伪目标"></a>.PHONY显示指明一个目标是伪目标</h3><p>.PHONY:clean<br>clean:<br>    rm -rf *.o</p><h3 id="«表示所有的依赖目标集（也就是”foo-c-bar-c”）"><a href="#«表示所有的依赖目标集（也就是”foo-c-bar-c”）" class="headerlink" title="$«表示所有的依赖目标集（也就是”foo.c bar.c”）"></a>$«表示所有的依赖目标集（也就是”foo.c bar.c”）</h3><p>$@表示目标集(也就是”foo.o bar.o”) </p><h3 id="object-foo-o-bar-o"><a href="#object-foo-o-bar-o" class="headerlink" title="object=foo.o bar.o"></a>object=foo.o bar.o</h3><p>all:$(objects)<br>$(objects):%.o:%.c<br>$(CC) -c $(CFLAGS) $« -o $@<br>等价于<br>foo.o:foo.c<br>$(CC) -c $(CFLAGS) foo.c -o foo.o<br>bar.o:bar.c<br>$(CC) -c $(CFLAGS) bar.c -o bar.o </p><h3 id="files-foo-elc-bar-o-lose-o"><a href="#files-foo-elc-bar-o-lose-o" class="headerlink" title="files=foo.elc bar.o lose.o"></a>files=foo.elc bar.o lose.o</h3><p>$(filter %.o,$(files)):%.o:%.c<br>fileter函数过滤，只去%.o的内容 </p><h3 id="查找源文件依赖-g-MM-main-c"><a href="#查找源文件依赖-g-MM-main-c" class="headerlink" title="查找源文件依赖 g++ -MM main.c"></a>查找源文件依赖 g++ -MM main.c</h3><p>输出main.o:main.c defs.h </p><h3 id="findstring-a-a-b-c-返回-a"><a href="#findstring-a-a-b-c-返回-a" class="headerlink" title="$(findstring a,a b c)  返回 a"></a>$(findstring a,a b c)  返回 a</h3><p>$(findstring a,b c)  返回 “” </p><h3 id="word-2-foo-bar-baz-返回值是”bar”"><a href="#word-2-foo-bar-baz-返回值是”bar”" class="headerlink" title="$(word 2,foo bar baz) 返回值是”bar”"></a>$(word 2,foo bar baz) 返回值是”bar”</h3><h3 id="sources-foo-c-bar-c"><a href="#sources-foo-c-bar-c" class="headerlink" title="sources = foo.c bar.c"></a>sources = foo.c bar.c</h3><p>include $(sources:.c=.d)<br>上述语句中的“$(sources:.c=.d)”中的“.c=.d”的意思是做一个替换,把变量<br>$(sources)所有[.c]的字串都替换成[.d],关于这个“替换”的内容</p>]]></content>
+      <content type="html"><![CDATA[<p>gnu-make学习 </p><h3 id="在makefile中的命令，必须要以【Tab】-键开始"><a href="#在makefile中的命令，必须要以【Tab】-键开始" class="headerlink" title="在makefile中的命令，必须要以【Tab】 键开始"></a>在makefile中的命令，必须要以【Tab】 键开始</h3><h3 id="make命令会在当前目录顺序找寻”GNUmakefile”-”makefile”-”Makefile”文件，"><a href="#make命令会在当前目录顺序找寻”GNUmakefile”-”makefile”-”Makefile”文件，" class="headerlink" title="make命令会在当前目录顺序找寻”GNUmakefile”,”makefile”,”Makefile”文件，"></a>make命令会在当前目录顺序找寻”GNUmakefile”,”makefile”,”Makefile”文件，</h3><p>如果要制定文件，加 -f 或者 –file参数  如make -f Make.Linux </p><h3 id="其中的foo-c可以省略-gcc也可以省略-make会自动推导"><a href="#其中的foo-c可以省略-gcc也可以省略-make会自动推导" class="headerlink" title="其中的foo.c可以省略,gcc也可以省略, make会自动推导"></a>其中的foo.c可以省略,gcc也可以省略, make会自动推导</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">foo.o : foo.c defs.h  </span><br><span class="line">gcc -c -g foo.c</span><br></pre></td></tr></table></figure><h3 id="如果命令太长可以使用反斜框’-’作为换行符"><a href="#如果命令太长可以使用反斜框’-’作为换行符" class="headerlink" title="如果命令太长可以使用反斜框’\’作为换行符"></a>如果命令太长可以使用反斜框’\’作为换行符</h3><h3 id="objects-wildcard-o-objects-代表所有-o文件的集合"><a href="#objects-wildcard-o-objects-代表所有-o文件的集合" class="headerlink" title="objects := $(wildcard *.o)   # objects 代表所有.o文件的集合"></a>objects := $(wildcard *.o)   # objects 代表所有.o文件的集合</h3><h3 id="VPATH变量"><a href="#VPATH变量" class="headerlink" title="VPATH变量"></a>VPATH变量</h3><p>make在当前的目录中找寻依赖文件和目标文件，如果找不到并且定义了VPATH变量，make会在值目录下去寻找文件<br>VPATH = src:src/test </p><h3 id="PHONY显示指明一个目标是伪目标"><a href="#PHONY显示指明一个目标是伪目标" class="headerlink" title=".PHONY显示指明一个目标是伪目标"></a>.PHONY显示指明一个目标是伪目标</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.PHONY:clean </span><br><span class="line">clean: </span><br><span class="line">rm -rf *.o</span><br></pre></td></tr></table></figure><h3 id="«表示所有的依赖目标集（也就是”foo-c-bar-c”）"><a href="#«表示所有的依赖目标集（也就是”foo-c-bar-c”）" class="headerlink" title="$«表示所有的依赖目标集（也就是”foo.c bar.c”）"></a>$«表示所有的依赖目标集（也就是”foo.c bar.c”）</h3><p>$@表示目标集(也就是”foo.o bar.o”) </p><h3 id="object-foo-o-bar-o"><a href="#object-foo-o-bar-o" class="headerlink" title="object=foo.o bar.o"></a>object=foo.o bar.o</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">all:$(objects) </span><br><span class="line">$(objects):%.o:%.c </span><br><span class="line">$(CC) -c $(CFLAGS) $« -o $@ </span><br><span class="line">等价于 </span><br><span class="line">foo.o:foo.c </span><br><span class="line">$(CC) -c $(CFLAGS) foo.c -o foo.o </span><br><span class="line">bar.o:bar.c </span><br><span class="line">$(CC) -c $(CFLAGS) bar.c -o bar.o</span><br></pre></td></tr></table></figure><h3 id="files-foo-elc-bar-o-lose-o"><a href="#files-foo-elc-bar-o-lose-o" class="headerlink" title="files=foo.elc bar.o lose.o"></a>files=foo.elc bar.o lose.o</h3><p>$(filter %.o,$(files)):%.o:%.c<br>fileter函数过滤，只去%.o的内容 </p><h3 id="查找源文件依赖-g-MM-main-c"><a href="#查找源文件依赖-g-MM-main-c" class="headerlink" title="查找源文件依赖 g++ -MM main.c"></a>查找源文件依赖 g++ -MM main.c</h3><p>输出main.o:main.c defs.h </p><h3 id="findstring-a-a-b-c-返回-a"><a href="#findstring-a-a-b-c-返回-a" class="headerlink" title="$(findstring a,a b c)  返回 a"></a>$(findstring a,a b c)  返回 a</h3><p>$(findstring a,b c)  返回 “” </p><h3 id="word-2-foo-bar-baz-返回值是”bar”"><a href="#word-2-foo-bar-baz-返回值是”bar”" class="headerlink" title="$(word 2,foo bar baz) 返回值是”bar”"></a>$(word 2,foo bar baz) 返回值是”bar”</h3><h3 id="sources-foo-c-bar-c"><a href="#sources-foo-c-bar-c" class="headerlink" title="sources = foo.c bar.c"></a>sources = foo.c bar.c</h3><p>include $(sources:.c=.d)<br>上述语句中的“$(sources:.c=.d)”中的“.c=.d”的意思是做一个替换,把变量<br>$(sources)所有[.c]的字串都替换成[.d],关于这个“替换”的内容</p>]]></content>
+      
+      <categories>
+          
+          <category> cpp </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> cpp </tag>
+            
+            <tag> makefile </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>php-string</title>
+      <link href="/2018/06/01/script/php-string/"/>
+      <url>/2018/06/01/script/php-string/</url>
+      <content type="html"><![CDATA[<p>php语言字符串操作</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">$_str=<span class="string">"Hello,World"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//1.获取字符串的第一个字母</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"1.获取字符串的第一个字母:"</span>.substr($_str,<span class="number">0</span>,<span class="number">1</span>).<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.获取字符串的第二和第三个字母</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"2.获取字符串的第二和第三个字母:"</span>.substr($_str,<span class="number">1</span>,<span class="number">2</span>).<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//3.获取字符串的最后一个字母</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"3.获取字符串的最后一个字母:"</span>.substr($_str,strlen($_str)<span class="number">-1</span>,<span class="number">1</span>).<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//4.字符串开头字母判断</span></span><br><span class="line"><span class="keyword">if</span>(strrpos($_str,<span class="string">"Hello"</span>)!==<span class="keyword">false</span> &amp;&amp; strrpos($_str,<span class="string">"Hello"</span>)==<span class="number">0</span>)&#123;  </span><br><span class="line"><span class="keyword">echo</span> <span class="string">"4.字符串开头字母比较:以Hello开头&lt;br/&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//5.字符串结尾字母判断</span></span><br><span class="line"><span class="keyword">if</span>(strrpos($_str,<span class="string">"World"</span>)!==<span class="keyword">false</span> &amp;&amp; strrpos($_str,<span class="string">"World"</span>)== strlen($_str)<span class="number">-5</span>)&#123;  </span><br><span class="line"><span class="keyword">echo</span> <span class="string">"5.字符串结尾字母比较:以World结尾&lt;br/&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//6.获取字符串长度</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"6.获取字符串长度:"</span>.strlen($_str).<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//7.大小写转换</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"7.大小写转换:"</span>.strtoupper($_str).<span class="string">","</span>.strtolower($_str).<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//8.字符串转int,int转字符串</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"8.字符串转int,int转字符串:"</span>.intval(<span class="string">"100"</span>).<span class="string">","</span>.((string)<span class="number">100</span>).<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//9.分割字符串</span></span><br><span class="line">$a = explode(<span class="string">','</span>,$_str);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"9.分割字符串:["</span>.$_str.<span class="string">"---&gt;"</span>.$a[<span class="number">0</span>].<span class="string">"]&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//10.判断字符串是否包含</span></span><br><span class="line"><span class="keyword">if</span>(strrpos($_str,<span class="string">"o,W"</span>)!==<span class="keyword">false</span> &amp;&amp; strrpos($_str,<span class="string">"o,W"</span>)&gt;=<span class="number">0</span>)&#123;  </span><br><span class="line"><span class="keyword">echo</span> <span class="string">"10.分割字符串:包含o,W&lt;br/&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
       
       <categories>
           
@@ -291,9 +513,7 @@
       
         <tags>
             
-            <tag> cpp </tag>
-            
-            <tag> makefile </tag>
+            <tag> string </tag>
             
         </tags>
       
@@ -326,7 +546,7 @@
       <title>python-string</title>
       <link href="/2018/06/01/script/python-string/"/>
       <url>/2018/06/01/script/python-string/</url>
-      <content type="html"><![CDATA[<p>python字符串操作</p><pre><code class="python"><span class="comment">#!/usr/bin/python</span><span class="comment"># -*- coding: utf-8 -*-</span>_str=<span class="string">"Hello,World"</span><span class="comment">#1.获取字符串的第一个字母</span><span class="keyword">print</span> <span class="string">"1.获取字符串的第一个字母:"</span>+_str[<span class="number">0</span>]<span class="comment">#2.获取字符串的第二和第三个字母</span><span class="keyword">print</span> <span class="string">"2.获取字符串的第二和第三个字母:"</span>+_str[<span class="number">1</span>:<span class="number">3</span>]<span class="comment">#3.获取字符串的最后一个字母</span><span class="keyword">print</span> <span class="string">"3.获取字符串的最后一个字母:"</span>+_str[<span class="number">-1</span>]<span class="comment">#4.字符串开头字母判断</span><span class="keyword">if</span> _str.startswith(<span class="string">'Hello'</span>):    <span class="keyword">print</span> <span class="string">"4.字符串开头字母比较:以Hello开头"</span><span class="comment">#5.字符串结尾字母判断</span><span class="keyword">if</span> _str.endswith(<span class="string">'World'</span>):    <span class="keyword">print</span> <span class="string">"5.字符串结尾字母比较:以World结尾"</span><span class="comment">#6.获取字符串长度</span><span class="keyword">print</span> <span class="string">"6.获取字符串长度:"</span>+str(len(_str))<span class="comment">#7.大小写转换</span><span class="keyword">print</span> <span class="string">"7.大小写转换:"</span>+_str.upper()+<span class="string">","</span>+_str.lower()<span class="comment">#8.字符串转int,int转字符串</span><span class="keyword">print</span> <span class="string">"8.字符串转int,int转字符串:"</span>+str(int(<span class="string">"100"</span>))+<span class="string">","</span>+str(<span class="number">100</span>)<span class="comment">#9.分割字符串</span><span class="keyword">print</span> <span class="string">"9.分割字符串:["</span>+_str.split(<span class="string">','</span>)[<span class="number">0</span>]+<span class="string">","</span>+_str.split(<span class="string">','</span>)[<span class="number">1</span>]+<span class="string">"]"</span><span class="comment">#10.判断字符串是否包含</span><span class="keyword">if</span> _str.find(<span class="string">'o,W'</span>)!=<span class="number">-1</span>:    <span class="keyword">print</span> <span class="string">"10.分割字符串:包含o,W"</span></code></pre>]]></content>
+      <content type="html"><![CDATA[<p>python字符串操作</p><pre><code>#!/usr/bin/python# -*- coding: utf-8 -*-_str=&quot;Hello,World&quot;#1.获取字符串的第一个字母print &quot;1.获取字符串的第一个字母:&quot;+_str[0]#2.获取字符串的第二和第三个字母print &quot;2.获取字符串的第二和第三个字母:&quot;+_str[1:3]#3.获取字符串的最后一个字母print &quot;3.获取字符串的最后一个字母:&quot;+_str[-1]#4.字符串开头字母判断if _str.startswith(&apos;Hello&apos;):    print &quot;4.字符串开头字母比较:以Hello开头&quot;#5.字符串结尾字母判断if _str.endswith(&apos;World&apos;):    print &quot;5.字符串结尾字母比较:以World结尾&quot;#6.获取字符串长度print &quot;6.获取字符串长度:&quot;+str(len(_str))#7.大小写转换print &quot;7.大小写转换:&quot;+_str.upper()+&quot;,&quot;+_str.lower()#8.字符串转int,int转字符串print &quot;8.字符串转int,int转字符串:&quot;+str(int(&quot;100&quot;))+&quot;,&quot;+str(100)#9.分割字符串print &quot;9.分割字符串:[&quot;+_str.split(&apos;,&apos;)[0]+&quot;,&quot;+_str.split(&apos;,&apos;)[1]+&quot;]&quot;#10.判断字符串是否包含if _str.find(&apos;o,W&apos;)!=-1:    print &quot;10.分割字符串:包含o,W&quot;</code></pre>]]></content>
       
       <categories>
           
@@ -346,46 +566,67 @@
     </entry>
     
     <entry>
-      <title>vue学习笔记</title>
-      <link href="/2018/06/01/html/vue-notepad/"/>
-      <url>/2018/06/01/html/vue-notepad/</url>
-      <content type="html"><![CDATA[<h3 id="v-bind-缩写"><a href="#v-bind-缩写" class="headerlink" title="v-bind 缩写"></a>v-bind 缩写</h3><pre><code>* &lt;!-- 完整语法 --&gt;* &lt;a v-bind:href=&quot;url&quot;&gt;&lt;/a&gt;* &lt;!-- 缩写 --&gt;* &lt;a :href=&quot;url&quot;&gt;&lt;/a&gt;</code></pre><h3 id="v-on-缩写"><a href="#v-on-缩写" class="headerlink" title="v-on 缩写"></a>v-on 缩写</h3><pre><code>* &lt;!-- 完整语法 --&gt;* &lt;a v-on:click=&quot;doSomething&quot;&gt;&lt;/a&gt;* &lt;!-- 缩写 --&gt;* &lt;a @click=&quot;doSomething&quot;&gt;&lt;/a&gt;</code></pre><h6 id="当你在一个定制的组件上用到-class-属性的时候，这些类将被添加到根元素上面，这个元素上已经存在的类不会被覆盖。"><a href="#当你在一个定制的组件上用到-class-属性的时候，这些类将被添加到根元素上面，这个元素上已经存在的类不会被覆盖。" class="headerlink" title="当你在一个定制的组件上用到 class 属性的时候，这些类将被添加到根元素上面，这个元素上已经存在的类不会被覆盖。"></a>当你在一个定制的组件上用到 class 属性的时候，这些类将被添加到根元素上面，这个元素上已经存在的类不会被覆盖。</h6>]]></content>
+      <title>技术问题汇总</title>
+      <link href="/2018/06/01/think/think-problems/"/>
+      <url>/2018/06/01/think/think-problems/</url>
+      <content type="html"><![CDATA[<h3 id="管理平台状态显示中文数字或者英文，没有对应转换为中文。"><a href="#管理平台状态显示中文数字或者英文，没有对应转换为中文。" class="headerlink" title="管理平台状态显示中文数字或者英文，没有对应转换为中文。"></a>管理平台状态显示中文数字或者英文，没有对应转换为中文。</h3><p>问题分析：数据库字段对应的是char类型，会有空格，导致，无法匹配转换</p><h3 id="部署在一台服务器没问题，部署到新的服务器有问题"><a href="#部署在一台服务器没问题，部署到新的服务器有问题" class="headerlink" title="部署在一台服务器没问题，部署到新的服务器有问题"></a>部署在一台服务器没问题，部署到新的服务器有问题</h3><p>问题分析：确认jdk版本和服务器版本， 有可能是jar包或者编译代码的jdk版本太高导致</p><h3 id="代码调试的时候-突然跳过好几行-或者觉的不该在对应X行就跳出来的情况"><a href="#代码调试的时候-突然跳过好几行-或者觉的不该在对应X行就跳出来的情况" class="headerlink" title="代码调试的时候,突然跳过好几行,或者觉的不该在对应X行就跳出来的情况:"></a>代码调试的时候,突然跳过好几行,或者觉的不该在对应X行就跳出来的情况:</h3><p>问题分析：很有可能是代码编译出问题,运行的代码和源码不一致.</p><h3 id="执行sql，一直在执行中"><a href="#执行sql，一直在执行中" class="headerlink" title="执行sql，一直在执行中"></a>执行sql，一直在执行中</h3><p>问题分析：很可能是别的程序执行相关sql未提交导致</p><h3 id="打印出来的2个字符串一致，但判断相等却是不等？"><a href="#打印出来的2个字符串一致，但判断相等却是不等？" class="headerlink" title="打印出来的2个字符串一致，但判断相等却是不等？"></a>打印出来的2个字符串一致，但判断相等却是不等？</h3><p>问题分析:很可能是有字符串包含空格</p>]]></content>
       
       <categories>
           
-          <category> html </category>
+          <category> 其他 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> html </tag>
-            
-            <tag> vue </tag>
+            <tag> 问题 </tag>
             
         </tags>
       
     </entry>
     
     <entry>
-      <title>从jar中查找class</title>
-      <link href="/2018/06/01/toolsCode/find-jar-by-class/"/>
-      <url>/2018/06/01/toolsCode/find-jar-by-class/</url>
-      <content type="html"><![CDATA[<h2 id="代码-bin-findjar-py"><a href="#代码-bin-findjar-py" class="headerlink" title="代码:bin_findjar.py"></a>代码:bin_findjar.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python  </span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-  </span></span><br><span class="line"><span class="comment">#######################################  </span></span><br><span class="line"><span class="comment">#参数1  jar的路径  </span></span><br><span class="line"><span class="comment">#参数2  class的关键字  </span></span><br><span class="line"><span class="comment">########################################  </span></span><br><span class="line"><span class="keyword">import</span> os  </span><br><span class="line"><span class="keyword">import</span> sys  </span><br><span class="line">path=<span class="string">""</span>  </span><br><span class="line"><span class="keyword">if</span> len(sys.argv)&gt;= <span class="number">3</span>:  </span><br><span class="line">    path=sys.argv[<span class="number">1</span>]  </span><br><span class="line">    value=sys.argv[<span class="number">2</span>].strip()  </span><br><span class="line"><span class="keyword">else</span>:  </span><br><span class="line">    <span class="keyword">print</span> <span class="string">"参数有误。。。"</span>  </span><br><span class="line">    sys.exit()  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">for</span> d <span class="keyword">in</span> os.listdir(path):  </span><br><span class="line">    <span class="keyword">if</span> d.endswith(<span class="string">"jar"</span>):  </span><br><span class="line">        <span class="comment">#print "unzip -l "+ path+"/"+d+" | grep "+value  </span></span><br><span class="line">        pipe=os.popen(<span class="string">"unzip -l "</span>+ path+<span class="string">"/"</span>+d+<span class="string">" | grep "</span>+value)  </span><br><span class="line">        string= pipe.read()  </span><br><span class="line">        pipe.close()  </span><br><span class="line">        <span class="keyword">if</span> len(string)&lt;=<span class="number">0</span>:  </span><br><span class="line">            <span class="keyword">pass</span>  </span><br><span class="line">        <span class="keyword">else</span>:  </span><br><span class="line">            <span class="keyword">print</span> <span class="string">"path:"</span>+d  </span><br><span class="line">            <span class="keyword">print</span> string  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">else</span>:  </span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure><h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h2><pre><code class="bash">./bin_findjar.py ~/.m2/repository/org/yu/util/yuutil/1.0/ DbHelper      817  06-29-2017 19:59   org/yu/util/db/DbHelper<span class="variable">$1</span>.class     4758  06-29-2017 19:59   org/yu/util/db/DbHelper.class</code></pre>]]></content>
+      <title>tomcat自动启停脚本</title>
+      <link href="/2018/06/01/shell/tomcat-start-end/"/>
+      <url>/2018/06/01/shell/tomcat-start-end/</url>
+      <content type="html"><![CDATA[<p>开发环境tomcat下经常重新部署,需要关闭tomcat进程,判断是否关闭成功,配置文件替换,图片备份,再启动tomcat.<br>通过ps和awk命令,可以把关闭和启动tomcat命令都集成到一个脚本中,一键部署更新.<br>以下是一个真实列子:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">app=<span class="string">'/home/poc/tomcat'</span></span><br><span class="line">info=ps aux | grep <span class="string">"<span class="variable">$&#123;app&#125;</span>"</span> | grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$info</span>"</span> ]; <span class="keyword">then</span> </span><br><span class="line"><span class="built_in">echo</span> <span class="string">'is not running and start tomcat'</span></span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line"><span class="built_in">echo</span> <span class="string">'is also running and stopping'</span></span><br><span class="line">    /home/poc/tomcat/bin/shutdown.sh </span><br><span class="line">    sleep 1 </span><br><span class="line">    info=ps aux | grep <span class="string">"<span class="variable">$&#123;app&#125;</span>"</span> | grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span> </span><br><span class="line">    <span class="keyword">if</span> [ -z <span class="string">"info"</span>];<span class="keyword">then</span> </span><br><span class="line">        <span class="built_in">echo</span> <span class="string">'starttomcat…'</span> </span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="built_in">kill</span> −9 info </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">'kill tomcat'</span></span><br><span class="line">    <span class="keyword">fi</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span> </span><br><span class="line"><span class="built_in">cd</span> /home/poc/tomcat/webapps </span><br><span class="line">rm -rf /home/poc/identityPic </span><br><span class="line"><span class="built_in">echo</span> <span class="string">'备份图片'</span></span><br><span class="line">cp /home/poc/tomcat/webapps/ar/identityPic ~ -R </span><br><span class="line">rm -rf ar* </span><br><span class="line">mkdir ar </span><br><span class="line">cp ~/ar.war ar/ </span><br><span class="line"><span class="built_in">cd</span> ar </span><br><span class="line">rm -rf identityPic </span><br><span class="line">jar xvf ar.war </span><br><span class="line">rm -rf ar.war </span><br><span class="line">cp ~/config/config.properties WEB-INF/classes/tinyConf </span><br><span class="line">cp ~/config/db.properties WEB-INF/classes/tinyConf </span><br><span class="line">cp /home/poc/identityPic /home/poc/tomcat/webapps/ar/ -R </span><br><span class="line"><span class="built_in">echo</span> <span class="string">'start tomcat'</span></span><br><span class="line">/home/poc/tomcat/bin/startup.sh</span><br></pre></td></tr></table></figure>]]></content>
       
       <categories>
           
-          <category> tools </category>
+          <category> shell </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> java </tag>
+            <tag> shell </tag>
             
-            <tag> tools </tag>
+            <tag> tomcat </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>go-string</title>
+      <link href="/2018/06/01/script/go-string/"/>
+      <url>/2018/06/01/script/go-string/</url>
+      <content type="html"><![CDATA[<p>go语言字符串操作</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> str <span class="keyword">string</span> = <span class="string">"Hello,World"</span></span><br><span class="line"><span class="comment">//1.获取字符串的第一个字母</span></span><br><span class="line">fmt.Printf(<span class="string">"1.获取字符串的第一个字母:%c\n"</span>, str[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.获取字符串的第二和第三个字母</span></span><br><span class="line">fmt.Printf(<span class="string">"2.获取字符串的第二和第三个字母:%s\n"</span>, str[<span class="number">1</span>:<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">//3.获取字符串的最后一个字母</span></span><br><span class="line">fmt.Printf(<span class="string">"3.获取字符串的最后一个字母:%c\n"</span>, str[<span class="built_in">len</span>(str)<span class="number">-1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">//4.字符串开头字母判断</span></span><br><span class="line"><span class="keyword">if</span> str[:<span class="number">5</span>] == <span class="string">"Hello"</span> &#123;</span><br><span class="line">fmt.Printf(<span class="string">"4.字符串开头字母比较:以Hello开头\n"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//5.字符串结尾字母判断</span></span><br><span class="line"><span class="keyword">if</span> str[<span class="built_in">len</span>(str)<span class="number">-5</span>:<span class="built_in">len</span>(str)] == <span class="string">"World"</span> &#123;</span><br><span class="line">fmt.Printf(<span class="string">"5.字符串结尾字母比较:以World结尾\n"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//6.获取字符串长度</span></span><br><span class="line">fmt.Printf(<span class="string">"6.获取字符串长度:%d\n"</span>, <span class="built_in">len</span>(str))</span><br><span class="line"></span><br><span class="line"><span class="comment">/*//7.大小写转换</span></span><br><span class="line"><span class="comment">System.out.println("7.大小写转换:"+str.toUpperCase()+","+str.toLowerCase());</span></span><br><span class="line"><span class="comment">//8.字符串转int,int转字符串</span></span><br><span class="line"><span class="comment">System.out.println("8.字符串转int,int转字符串:"+Integer.parseInt("100")+","+String.valueOf(100));</span></span><br><span class="line"><span class="comment">//9.分割字符串</span></span><br><span class="line"><span class="comment">String[] strs = str.split(",");</span></span><br><span class="line"><span class="comment">System.out.println("9.分割字符串:"+"["+strs[0]+","+strs[1]+"]");</span></span><br><span class="line"><span class="comment">//10.判断字符串是否包含</span></span><br><span class="line"><span class="comment">if(str.contains("o,W"))&#123;</span></span><br><span class="line"><span class="comment">System.out.println("10.分割字符串:包含o,W");</span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      <categories>
+          
+          <category> go </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> string </tag>
+            
+            <tag> go </tag>
             
         </tags>
       
@@ -415,6 +656,29 @@
     </entry>
     
     <entry>
+      <title>从jar中查找class</title>
+      <link href="/2018/06/01/toolsCode/find-jar-by-class/"/>
+      <url>/2018/06/01/toolsCode/find-jar-by-class/</url>
+      <content type="html"><![CDATA[<h2 id="代码-bin-findjar-py"><a href="#代码-bin-findjar-py" class="headerlink" title="代码:bin_findjar.py"></a>代码:bin_findjar.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python  </span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-  </span></span><br><span class="line"><span class="comment">#######################################  </span></span><br><span class="line"><span class="comment">#参数1  jar的路径  </span></span><br><span class="line"><span class="comment">#参数2  class的关键字  </span></span><br><span class="line"><span class="comment">########################################  </span></span><br><span class="line"><span class="keyword">import</span> os  </span><br><span class="line"><span class="keyword">import</span> sys  </span><br><span class="line">path=<span class="string">""</span>  </span><br><span class="line"><span class="keyword">if</span> len(sys.argv)&gt;= <span class="number">3</span>:  </span><br><span class="line">    path=sys.argv[<span class="number">1</span>]  </span><br><span class="line">    value=sys.argv[<span class="number">2</span>].strip()  </span><br><span class="line"><span class="keyword">else</span>:  </span><br><span class="line">    <span class="keyword">print</span> <span class="string">"参数有误。。。"</span>  </span><br><span class="line">    sys.exit()  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">for</span> d <span class="keyword">in</span> os.listdir(path):  </span><br><span class="line">    <span class="keyword">if</span> d.endswith(<span class="string">"jar"</span>):  </span><br><span class="line">        <span class="comment">#print "unzip -l "+ path+"/"+d+" | grep "+value  </span></span><br><span class="line">        pipe=os.popen(<span class="string">"unzip -l "</span>+ path+<span class="string">"/"</span>+d+<span class="string">" | grep "</span>+value)  </span><br><span class="line">        string= pipe.read()  </span><br><span class="line">        pipe.close()  </span><br><span class="line">        <span class="keyword">if</span> len(string)&lt;=<span class="number">0</span>:  </span><br><span class="line">            <span class="keyword">pass</span>  </span><br><span class="line">        <span class="keyword">else</span>:  </span><br><span class="line">            <span class="keyword">print</span> <span class="string">"path:"</span>+d  </span><br><span class="line">            <span class="keyword">print</span> string  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">else</span>:  </span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure><h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h2><pre><code class="bash">./bin_findjar.py ~/.m2/repository/org/yu/util/yuutil/1.0/ DbHelper      817  06-29-2017 19:59   org/yu/util/db/DbHelper<span class="variable">$1</span>.class     4758  06-29-2017 19:59   org/yu/util/db/DbHelper.class</code></pre>]]></content>
+      
+      <categories>
+          
+          <category> tools </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> tools </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>vscode插件学习笔记</title>
       <link href="/2018/06/01/vscode/vscode-notepad/"/>
       <url>/2018/06/01/vscode/vscode-notepad/</url>
@@ -430,245 +694,6 @@
         <tags>
             
             <tag> vscode </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>开源框架</title>
-      <link href="/2018/06/01/open-frame/"/>
-      <url>/2018/06/01/open-frame/</url>
-      <content type="html"><![CDATA[<h2 id="js框架"><a href="#js框架" class="headerlink" title="js框架"></a>js框架</h2><table><thead><tr><th>框架名称</th><th style="text-align:center">介绍</th><th style="text-align:right">备注 </th></tr></thead><tbody><tr><td>prettify.js</td><td style="text-align:center">支持页面语法着亮</td><td style="text-align:right">- </td></tr></tbody></table><h2 id="python框架"><a href="#python框架" class="headerlink" title="python框架"></a>python框架</h2><table><thead><tr><th>框架名称</th><th style="text-align:center">介绍</th><th style="text-align:right">备注 </th></tr></thead><tbody><tr><td>django</td><td style="text-align:center">python的web开发框架</td><td style="text-align:right"><a href="http://www.djangoproject.com/" target="_blank" rel="noopener">官网</a></td></tr></tbody></table>]]></content>
-      
-      <categories>
-          
-          <category> 开源 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> frame </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>开源软件</title>
-      <link href="/2018/06/01/open-soft/"/>
-      <url>/2018/06/01/open-soft/</url>
-      <content type="html"><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><table><thead><tr><th>框架名称</th><th style="text-align:center">介绍</th><th style="text-align:right">备注 </th></tr></thead><tbody><tr><td>sts</td><td style="text-align:center">基于 nodejs 的静态服务器</td><td style="text-align:right">“npm install -g sts ; cd webroot-dev ; sts 19091”</td></tr><tr><td>iterm2</td><td style="text-align:center">终端工具　</td><td style="text-align:right">mac下用这个代替系统自带的</td></tr></tbody></table>]]></content>
-      
-      <categories>
-          
-          <category> 开源 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> soft </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>nginx编译安装</title>
-      <link href="/2018/06/01/install/install-nginx/"/>
-      <url>/2018/06/01/install/install-nginx/</url>
-      <content type="html"><![CDATA[<p>nginx编译安装</p><p>安装nginx之前需要安装相关组件</p><h3 id="openssl安装"><a href="#openssl安装" class="headerlink" title="openssl安装"></a>openssl安装</h3><p>1.官网下载安装包</p><ol start="2"><li>tar zxvf openssl-fips-2.0.10.tar.gz</li><li>cd openssl-fips-2.0.10</li><li>./config </li><li>make &amp;&amp; make install</li></ol><h3 id="pcre安装"><a href="#pcre安装" class="headerlink" title="pcre安装"></a>pcre安装</h3><p>1.官网下载安装包</p><ol start="2"><li>tar zxvf pcre-8.40.tar.gz</li><li>cd pcre-8.40</li><li>./configure </li><li>make &amp;&amp; make install</li></ol><h3 id="zlib安装"><a href="#zlib安装" class="headerlink" title="zlib安装"></a>zlib安装</h3><ol><li>官网下载安装包</li><li>tar zxvf zlib-1.2.11.tar.gz</li><li>cd zlib-1.2.11</li><li>./configure</li><li>make &amp;&amp; make install</li></ol><h3 id="安装openssl"><a href="#安装openssl" class="headerlink" title="安装openssl"></a>安装openssl</h3><p>cd openssl-1.0.2l<br>./config –prefix=/usr/local/openssl<br>make &amp;&amp; make install</p><p>cd nginx-1.10.3/auto/lib/openssl/conf</p><p>CORE_INCS=”$CORE_INCS $OPENSSL/.openssl/include”<br>CORE_DEPS=”$CORE_DEPS $OPENSSL/.openssl/include/openssl/ssl.h”<br>CORE_LIBS=”$CORE_LIBS $OPENSSL/.openssl/lib/libssl.a”<br>CORE_LIBS=”$CORE_LIBS $OPENSSL/.openssl/lib/libcrypto.a”<br>CORE_LIBS=”$CORE_LIBS $NGX_LIBDL”<br>修改成以下代码：</p><p>CORE_INCS=”$CORE_INCS $OPENSSL/include”<br>CORE_DEPS=”$CORE_DEPS $OPENSSL/include/openssl/ssl.h”<br>CORE_LIBS=”$CORE_LIBS $OPENSSL/lib/libssl.a”<br>CORE_LIBS=”$CORE_LIBS $OPENSSL/lib/libcrypto.a”<br>CORE_LIBS=”$CORE_LIBS $NGX_LIBDL”</p><h3 id="最后安装nignx"><a href="#最后安装nignx" class="headerlink" title="最后安装nignx"></a>最后安装nignx</h3><ol><li>官网下载安装包</li><li>tar zxvf nginx-1.10.3.tar.gz</li><li>cd nginx-1.10.3</li><li>./configure  –with-http_stub_status_module –with-http_ssl_module –with-ssl=/usr/local/openssl</li><li>make &amp;&amp; make install</li></ol><h3 id="配置nginx"><a href="#配置nginx" class="headerlink" title="配置nginx"></a>配置nginx</h3><p>配置请求从nginx转发到tomcat<br>vi nginx.conf<br>在server {节点里面增加配置:<br>location  /应用名/ {<br>       proxy_set_header Host $host;<br>       proxy_pass http://对应ip:对应端口/应用名/;<br>}</p><p>重启nginx,让配置生效</p><p>nginx实现tcp反向代理</p><p>下载tcp模块源码<br>git clone <a href="https://github.com/yaoweibin/nginx_tcp_proxy_module.git" target="_blank" rel="noopener">https://github.com/yaoweibin/nginx_tcp_proxy_module.git</a></p><p>给nginx源码打patch<br>cd nginx-1.10.3<br>patch -p1 &lt; ../nginx_tcp_proxy_module/tcp.patch</p><p>./configure  –add-module=../nginx_tcp_proxy_module –prefix=/usr/local/nginx –with-openssl=/usr/local/openssl<br>make &amp;&amp; sudo make install</p><ol start="4"><li>root用户/root/.bash_profile文件中增加<br>export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH<br>再执行命令source /root/.bash_profile</li></ol><p>5.cd /usr/local/nginx<br>增加配置vi conf/nginx.conf</p><p>tcp{<br>     upstream cluster {<br>             server xx.xx.x1:5222;<br>     }<br>     server{<br>             listen 5000;<br>             proxy_pass cluster;<br>     }<br>}<br>tcp 和 http是平级的</p><p>客户端直接访问nginx服务器的ip:5222</p><p>nginx -s reload  ：修改配置后重新加载生效<br>nginx 启动<br>nginx -s stop 关闭</p><p>stream {<br>  upstream backend {<br>    hash $remote_addr consistent;<br>    server 10.25.0.141:5222 weight=5;<br>    server 10.25.0.141:5222      max_fails=3 fail_timeout=30s;<br>    server unix:/tmp/backend3;<br>  }<br>  server {<br>    listen 8111;<br>    proxy_connect_timeout 1s;<br>    proxy_timeout 3s;<br>    proxy_pass backend;<br>  }<br>  server {<br>    listen [::1]:8111;<br>    proxy_pass unix:/tmp/stream.socket;<br>  }<br>}</p><p>stream{<br>    upstream backend{<br>        hash $remote_addr consistent;<br>        server 10.25.0.141:5222 max_fails=3 fail_timeout=10s;<br>    }<br>    server{<br>        listen 8112;<br>        proxy_connect_timeout 20s;<br>        proxy_timeout 5m;<br>        proxy_pass backend;<br>    }<br>}</p>]]></content>
-      
-      <categories>
-          
-          <category> nginx </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> nginx </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>cpp-string</title>
-      <link href="/2018/06/01/script/cpp-string/"/>
-      <url>/2018/06/01/script/cpp-string/</url>
-      <content type="html"><![CDATA[<p>c++语言字符串操作</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; split(<span class="keyword">const</span> <span class="built_in">string</span>&amp; src, <span class="keyword">const</span> <span class="built_in">string</span> sp) ;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">str</span><span class="params">(<span class="string">"Hello,World"</span>)</span></span>;</span><br><span class="line"><span class="comment">//1.获取字符串的第一个字母</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"1.获取字符串的第一个字母:"</span> + str.substr(<span class="number">0</span>, <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//2.获取字符串的第二和第三个字母</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"2.获取字符串的第二和第三个字母:"</span> + str.substr(<span class="number">1</span>, <span class="number">2</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//3.获取字符串的最后一个字母</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"3.获取字符串的最后一个字母:"</span> + str.substr(str.length() - <span class="number">1</span>, <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//4.字符串开头字母判断</span></span><br><span class="line"><span class="keyword">if</span> (str.find(<span class="string">"Hello"</span>) == <span class="number">0</span>) &#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"4.字符串开头字母比较:以Hello开头"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//5.字符串结尾字母判断</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">w</span><span class="params">(<span class="string">"World"</span>)</span></span>;</span><br><span class="line"><span class="keyword">if</span> (str.rfind(w) == str.length() - w.length()) &#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"5.字符串结尾字母比较:以World结尾"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//6.获取字符串长度</span></span><br><span class="line"><span class="built_in">stringstream</span> ss;</span><br><span class="line">ss &lt;&lt; str.length();</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"6.获取字符串长度:"</span> + ss.str() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//7.大小写转换</span></span><br><span class="line">transform(str.begin(), str.end(), str.begin(), ::<span class="built_in">toupper</span>);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"7.大小写转换:"</span> + str;</span><br><span class="line">transform(str.begin(), str.end(), str.begin(), ::<span class="built_in">tolower</span>);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">","</span> + str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//8.字符串转int,int转字符串</span></span><br><span class="line"><span class="keyword">int</span> num;</span><br><span class="line"><span class="function"><span class="built_in">stringstream</span> <span class="title">ss2</span><span class="params">(<span class="string">"100"</span>)</span></span>;</span><br><span class="line">ss2 &gt;&gt; num;</span><br><span class="line"><span class="built_in">stringstream</span> ss3;</span><br><span class="line">ss3 &lt;&lt; num;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"8.字符串转int,int转字符串:"</span> + ss3.str() + <span class="string">","</span> + ss3.str() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//9.分割字符串</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; strs = ::split(str,<span class="built_in">string</span>(<span class="string">","</span>));</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"9.分割字符串:["</span> + strs[<span class="number">0</span>] +<span class="string">","</span>+strs[<span class="number">1</span>]&lt;&lt;<span class="string">"]"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//10.判断字符串是否包含</span></span><br><span class="line">str=<span class="string">"Hello,World"</span>;</span><br><span class="line"><span class="keyword">if</span> (str.find(<span class="string">"o,W"</span>)!=<span class="number">-1</span>) &#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"10.分割字符串:包含o,W"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; split(<span class="keyword">const</span> <span class="built_in">string</span>&amp; src, <span class="built_in">string</span> sp) &#123;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; strs;</span><br><span class="line"><span class="keyword">int</span> sp_len = sp.size();</span><br><span class="line"><span class="keyword">int</span> position = <span class="number">0</span>, index = <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">while</span> (<span class="number">-1</span> != (index = src.find(sp, position))) &#123;</span><br><span class="line">strs.push_back(src.substr(position, index - position));</span><br><span class="line">position = index + sp_len;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">string</span> lastStr = src.substr(position);</span><br><span class="line"><span class="keyword">if</span> (!lastStr.empty())</span><br><span class="line">strs.push_back(lastStr);</span><br><span class="line"><span class="keyword">return</span> strs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      
-      <categories>
-          
-          <category> cpp </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> string </tag>
-            
-            <tag> cpp </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>php-string</title>
-      <link href="/2018/06/01/script/php-string/"/>
-      <url>/2018/06/01/script/php-string/</url>
-      <content type="html"><![CDATA[<p>php语言字符串操作</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">$_str=<span class="string">"Hello,World"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//1.获取字符串的第一个字母</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"1.获取字符串的第一个字母:"</span>.substr($_str,<span class="number">0</span>,<span class="number">1</span>).<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.获取字符串的第二和第三个字母</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"2.获取字符串的第二和第三个字母:"</span>.substr($_str,<span class="number">1</span>,<span class="number">2</span>).<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//3.获取字符串的最后一个字母</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"3.获取字符串的最后一个字母:"</span>.substr($_str,strlen($_str)<span class="number">-1</span>,<span class="number">1</span>).<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//4.字符串开头字母判断</span></span><br><span class="line"><span class="keyword">if</span>(strrpos($_str,<span class="string">"Hello"</span>)!==<span class="keyword">false</span> &amp;&amp; strrpos($_str,<span class="string">"Hello"</span>)==<span class="number">0</span>)&#123;  </span><br><span class="line"><span class="keyword">echo</span> <span class="string">"4.字符串开头字母比较:以Hello开头&lt;br/&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//5.字符串结尾字母判断</span></span><br><span class="line"><span class="keyword">if</span>(strrpos($_str,<span class="string">"World"</span>)!==<span class="keyword">false</span> &amp;&amp; strrpos($_str,<span class="string">"World"</span>)== strlen($_str)<span class="number">-5</span>)&#123;  </span><br><span class="line"><span class="keyword">echo</span> <span class="string">"5.字符串结尾字母比较:以World结尾&lt;br/&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//6.获取字符串长度</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"6.获取字符串长度:"</span>.strlen($_str).<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//7.大小写转换</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"7.大小写转换:"</span>.strtoupper($_str).<span class="string">","</span>.strtolower($_str).<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//8.字符串转int,int转字符串</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"8.字符串转int,int转字符串:"</span>.intval(<span class="string">"100"</span>).<span class="string">","</span>.((string)<span class="number">100</span>).<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//9.分割字符串</span></span><br><span class="line">$a = explode(<span class="string">','</span>,$_str);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"9.分割字符串:["</span>.$_str.<span class="string">"---&gt;"</span>.$a[<span class="number">0</span>].<span class="string">"]&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//10.判断字符串是否包含</span></span><br><span class="line"><span class="keyword">if</span>(strrpos($_str,<span class="string">"o,W"</span>)!==<span class="keyword">false</span> &amp;&amp; strrpos($_str,<span class="string">"o,W"</span>)&gt;=<span class="number">0</span>)&#123;  </span><br><span class="line"><span class="keyword">echo</span> <span class="string">"10.分割字符串:包含o,W&lt;br/&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-      
-      <categories>
-          
-          <category> 程序语言 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> string </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>看过的书</title>
-      <link href="/2018/06/01/read-book/"/>
-      <url>/2018/06/01/read-book/</url>
-      <content type="html"><![CDATA[<h3 id="大话设计模式"><a href="#大话设计模式" class="headerlink" title="大话设计模式"></a>大话设计模式</h3><p>非常不错，我的设计模式就是靠这本书入的门,讲的非常浅显易懂.<br>值得购买，和多看几遍;</p><h3 id="web安全"><a href="#web安全" class="headerlink" title="web安全"></a>web安全</h3><p>我的安全知识入门;</p><h3 id="java夜未眠"><a href="#java夜未眠" class="headerlink" title="java夜未眠"></a>java夜未眠</h3><p>可以扩展些知识，读起来也很轻松;</p><h3 id="think-in-java"><a href="#think-in-java" class="headerlink" title="think in java"></a>think in java</h3><p>看过好几遍，不建议入门看这本，当初刚学ｊａｖａ，看这本书，还是很受打击的．<br>后面每次翻这本书，总有新的收获；</p><h3 id="c程序设计语言（第2版）"><a href="#c程序设计语言（第2版）" class="headerlink" title="c程序设计语言（第2版）"></a>c程序设计语言（第2版）</h3><p>相见恨晚，早期学c就能看这本书该有多好，<br>很多疑问都可以在该书找到解答。</p>]]></content>
-      
-      <categories>
-          
-          <category> 杂谈 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> book </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>curl使用</title>
-      <link href="/2018/06/01/linux/linux-curl/"/>
-      <url>/2018/06/01/linux/linux-curl/</url>
-      <content type="html"><![CDATA[<h3 id="请求头信息"><a href="#请求头信息" class="headerlink" title="请求头信息"></a>请求头信息</h3><p>curl URL -H ‘Content-Type:application/json’</p><h3 id="携带请求参数"><a href="#携带请求参数" class="headerlink" title="携带请求参数"></a>携带请求参数</h3><p>curl URL -d “pa1=1&amp;pa2=2”</p><h3 id="urlencode"><a href="#urlencode" class="headerlink" title="urlencode"></a>urlencode</h3><p>curl URL –data-urlencode “pa1=这个&amp;pa2=哈哈”</p><p>###　返回http头信息<br>curl -i URL  </p><h3 id="访问https网站"><a href="#访问https网站" class="headerlink" title="访问https网站"></a>访问https网站</h3><p>curl  –insecure URL </p>]]></content>
-      
-      <categories>
-          
-          <category> linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> linux </tag>
-            
-            <tag> curl </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>linux-find</title>
-      <link href="/2018/06/01/linux/linux-find/"/>
-      <url>/2018/06/01/linux/linux-find/</url>
-      <content type="html"><![CDATA[<p>linux命令–find</p><h3 id="列出目录下所有的文件"><a href="#列出目录下所有的文件" class="headerlink" title="列出目录下所有的文件"></a>列出目录下所有的文件</h3><p>find dir </p><p>-path 以整体的路径进行匹配  -name则以文件名进行匹配<br>-iname 忽略大小写<br>! -name  反义</p><h3 id="当前目录下查找更改时间在5日以内的文件，可以用："><a href="#当前目录下查找更改时间在5日以内的文件，可以用：" class="headerlink" title="当前目录下查找更改时间在5日以内的文件，可以用："></a>当前目录下查找更改时间在5日以内的文件，可以用：</h3><p>find . -mtime -5 -print  +5则是5日以前</p><h3 id="或者5分钟内"><a href="#或者5分钟内" class="headerlink" title="或者5分钟内"></a>或者5分钟内</h3><p>find . -mmin -5 -print   +5则是超过5分钟</p><h3 id="时间戳概念-newer"><a href="#时间戳概念-newer" class="headerlink" title="时间戳概念 -newer"></a>时间戳概念 -newer</h3><p>find . -type f -newer file.txt -print<br>比file.txt这个参考文件更新的所有文件。</p><h3 id="当前目录下查找所有的目录，可以用："><a href="#当前目录下查找所有的目录，可以用：" class="headerlink" title="当前目录下查找所有的目录，可以用："></a>当前目录下查找所有的目录，可以用：</h3><p>find . -type d -print </p><h3 id="为了在当前目录下查找除目录以外的所有类型的文件，可以用："><a href="#为了在当前目录下查找除目录以外的所有类型的文件，可以用：" class="headerlink" title="为了在当前目录下查找除目录以外的所有类型的文件，可以用："></a>为了在当前目录下查找除目录以外的所有类型的文件，可以用：</h3><p>find . ! -type d -print </p><h3 id="当前目录下查找所有的符号链接文件，可以用："><a href="#当前目录下查找所有的符号链接文件，可以用：" class="headerlink" title="当前目录下查找所有的符号链接文件，可以用："></a>当前目录下查找所有的符号链接文件，可以用：</h3><p>find . -type l -print </p><h3 id="想要在当前目录及子目录中查找文件名以一个大写字母开头的文件"><a href="#想要在当前目录及子目录中查找文件名以一个大写字母开头的文件" class="headerlink" title="想要在当前目录及子目录中查找文件名以一个大写字母开头的文件"></a>想要在当前目录及子目录中查找文件名以一个大写字母开头的文件</h3><p>find . -name “[A-Z]*” -print   </p><h3 id="执行命令exec"><a href="#执行命令exec" class="headerlink" title="执行命令exec"></a>执行命令exec</h3><p>计算当前目录下各文件的大小<br>find . -type f -exec du -h {} \;</p><h3 id="查询大于100M的文件"><a href="#查询大于100M的文件" class="headerlink" title="查询大于100M的文件"></a>查询大于100M的文件</h3><p>find . -size +100M  </p><h3 id="查找文件内容"><a href="#查找文件内容" class="headerlink" title="查找文件内容"></a>查找文件内容</h3><p>find . -type f -name “*.java” |xargs -n 10 grep ‘new RpcResult(new RuntimeException’ -l</p><p>find . -type f -name “*.ts” |xargs -n 10 grep ‘registerDocumentLinkProvider’ -l</p>]]></content>
-      
-      <categories>
-          
-          <category> linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> linux </tag>
-            
-            <tag> find </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>linux-tar</title>
-      <link href="/2018/06/01/linux/linux-tar/"/>
-      <url>/2018/06/01/linux/linux-tar/</url>
-      <content type="html"><![CDATA[<p>linux 解压</p><h3 id="tar"><a href="#tar" class="headerlink" title=".tar"></a>.tar</h3><p>解包： tar xvf FileName.tar<br>打包：tar cvf FileName.tar DirName</p><h3 id="gz"><a href="#gz" class="headerlink" title=".gz"></a>.gz</h3><p>解压1：gunzip FileName.gz<br>解压2：gzip -d FileName.gz<br>压缩：gzip FileName<br>.tar.gz 和 .tgz<br>解压：tar zxvf FileName.tar.gz<br>压缩：tar zcvf FileName.tar.gz DirName</p><h3 id="bz2"><a href="#bz2" class="headerlink" title=".bz2"></a>.bz2</h3><p>解压1：bzip2 -d FileName.bz2<br>解压2：bunzip2 FileName.bz2<br>压缩： bzip2 -z FileName<br>.tar.bz2<br>解压：tar jxvf FileName.tar.bz2<br>压缩：tar jcvf FileName.tar.bz2 DirName</p><h3 id="bz"><a href="#bz" class="headerlink" title=".bz"></a>.bz</h3><p>解压1：bzip2 -d FileName.bz<br>解压2：bunzip2 FileName.bz<br>压缩：未知<br>.tar.bz<br>解压：tar jxvf FileName.tar.bz<br>压缩：未知</p><h3 id="Z"><a href="#Z" class="headerlink" title=".Z"></a>.Z</h3><p>解压：uncompress FileName.Z<br>压缩：compress FileName<br>.tar.Z<br>解压：tar Zxvf FileName.tar.Z<br>压缩：tar Zcvf FileName.tar.Z DirName</p><h3 id="zip"><a href="#zip" class="headerlink" title=".zip"></a>.zip</h3><p>解压：unzip FileName.zip</p><h2 id="压缩：zip-r-FileName-zip-DirName"><a href="#压缩：zip-r-FileName-zip-DirName" class="headerlink" title="压缩：zip -r FileName.zip DirName"></a>压缩：zip -r FileName.zip DirName</h2><p>.rar<br>解压：rar a FileName.rar</p><h2 id="压缩：rar-e-FileName-rar"><a href="#压缩：rar-e-FileName-rar" class="headerlink" title="压缩：rar e FileName.rar"></a>压缩：rar e FileName.rar</h2><p>.7z<br>解压: 7z x FileName.7z</p><h2 id="压缩："><a href="#压缩：" class="headerlink" title="压缩："></a>压缩：</h2><h3 id="打包和切割"><a href="#打包和切割" class="headerlink" title="打包和切割"></a>打包和切割</h3><p>要将目录logs打包压缩并分割成多个1M的文件，可以用下面的命令：<br>tar cjf - logs/ |split -b 1m - logs.tar.bz2.<br>完成后会产生下列文件：<br>logs.tar.bz2.aa, logs.tar.bz2.ab, logs.tar.bz2.ac<br>要解压的时候只要执行下面的命令就可以了：<br>cat logs.tar.bz2.a* | tar jxv</p><h3 id="加密和解压"><a href="#加密和解压" class="headerlink" title="加密和解压"></a>加密和解压</h3><p>zip -e yu.zip yu/<br>接着提示输入2次密码</p><p>unzip yu.zip<br>接着会提示输入密码</p><h3 id="排除目录"><a href="#排除目录" class="headerlink" title="排除目录"></a>排除目录</h3><p>tar cfz hosteguide.com.tar.gz –exclude=/var/www/hosteguide.com/files/dontneed /var/www/hosteguide.com </p>]]></content>
-      
-      <categories>
-          
-          <category> linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> linux </tag>
-            
-            <tag> tar </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>mac下常用命令</title>
-      <link href="/2018/06/01/linux/mac-commands/"/>
-      <url>/2018/06/01/linux/mac-commands/</url>
-      <content type="html"><![CDATA[<h3 id="打开当前目录"><a href="#打开当前目录" class="headerlink" title="打开当前目录"></a>打开当前目录</h3><p>open . </p><h3 id="iterm屏幕切分"><a href="#iterm屏幕切分" class="headerlink" title="iterm屏幕切分"></a>iterm屏幕切分</h3><p>cmd + d  水平分屏幕<br>cmd + shift + d 垂直分屏幕</p><h3 id="pbcopy-和-pbpaste"><a href="#pbcopy-和-pbpaste" class="headerlink" title="pbcopy 和 pbpaste"></a>pbcopy 和 pbpaste</h3><p>ls ~|pbcopy<br>pbcopy &lt; blogpost.txt<br>pbpaste &gt;&gt; tasklist.txt</p><h3 id="mdfind"><a href="#mdfind" class="headerlink" title="mdfind"></a>mdfind</h3><p>-onlyin选项可以约束搜索范围为一个目录：<br>mdfind -onlyin ~/Documents essay</p><h3 id="screencapture命令可以截图"><a href="#screencapture命令可以截图" class="headerlink" title="screencapture命令可以截图"></a>screencapture命令可以截图</h3><p>抓取包含鼠标光标的全屏幕，并以image.png插入到新邮件的附件中：<br>screencapture -C -M image.png<br>用鼠标选择抓取窗口（及阴影）并复制到剪贴板：<br>screencapture -c -W<br>延时10秒后抓屏，并在Preview中打开之：<br>全选复制放进笔记<br>screencapture -T 10 -P image.png<br>用鼠标截取一个矩形区域，抓取后存为pdf文件：<br>全选复制放进笔记<br>screencapture -s -t pdf image.pd</p><h3 id="launchctl"><a href="#launchctl" class="headerlink" title="launchctl"></a>launchctl</h3><p>launchctl管理OS X的启动脚本，控制启动计算机时需要开启的服务。也可以设置定时执行特定任务的脚本，就像Linux cron一样。</p><p>例如，开机时自动启动Apache服务器：<br>sudo launchctl load -w /System/Library/LaunchDaemons/org.apache.httpd.plist<br>运行launchctl list显示当前的启动脚本。sudo launchctl unload [path/to/script]停止正在运行的启动脚本，再加上-w选项即可去除开机启动。用这个方法可以一次去除Adobe或Microsoft Office所附带的所有“自动更新”后台程序。</p><p>Launchd脚本存储在以下位置：<br>~/Library/LaunchAgents<br>/Library/LaunchAgents<br>/Library/LaunchDaemons<br>/System/Library/LaunchAgents<br>/System/Library/LaunchDaemons</p><h3 id="say"><a href="#say" class="headerlink" title="say"></a>say</h3><p>say是一个文本转语音（TTS）的有趣的工具，引擎和OS X使用的一样也是VoiceOver。如果不加其他选项，则会简单的语音朗读你给定的字符串：</p><p>$ say “Never trust a computer you can’t lift.”<br>用-f选项朗读特定文本文件，-o选项将朗读结果存为音频文件而不是播放：</p><p>全选复制放进笔记$ say -f mynovel.txt -o myaudiobook.aiff<br>say命令可以用于在脚本中播放警告或提示。例如你可以设置Automator或Hazel脚本处理文件，并在任务完成时用say命令语音提示。</p><h3 id="刷新签名"><a href="#刷新签名" class="headerlink" title="刷新签名"></a>刷新签名</h3><p>xattr -rc .<br>sudo codesign -fs - /Applications/Utilities/Boot\ Camp\ Assistant.app<br>检查下签名是否完整好用，如果正确，没任何输出；<br>codesign –verify ~/Desktop/TestWidget.app </p>]]></content>
-      
-      <categories>
-          
-          <category> linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> mac </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>技术问题汇总</title>
-      <link href="/2018/06/01/think/think-problems/"/>
-      <url>/2018/06/01/think/think-problems/</url>
-      <content type="html"><![CDATA[<h3 id="管理平台状态显示中文数字或者英文，没有对应转换为中文。"><a href="#管理平台状态显示中文数字或者英文，没有对应转换为中文。" class="headerlink" title="管理平台状态显示中文数字或者英文，没有对应转换为中文。"></a>管理平台状态显示中文数字或者英文，没有对应转换为中文。</h3><p>问题分析：数据库字段对应的是char类型，会有空格，导致，无法匹配转换</p><h3 id="部署在一台服务器没问题，部署到新的服务器有问题"><a href="#部署在一台服务器没问题，部署到新的服务器有问题" class="headerlink" title="部署在一台服务器没问题，部署到新的服务器有问题"></a>部署在一台服务器没问题，部署到新的服务器有问题</h3><p>问题分析：确认jdk版本和服务器版本， 有可能是jar包或者编译代码的jdk版本太高导致</p><h3 id="代码调试的时候-突然跳过好几行-或者觉的不该在对应X行就跳出来的情况"><a href="#代码调试的时候-突然跳过好几行-或者觉的不该在对应X行就跳出来的情况" class="headerlink" title="代码调试的时候,突然跳过好几行,或者觉的不该在对应X行就跳出来的情况:"></a>代码调试的时候,突然跳过好几行,或者觉的不该在对应X行就跳出来的情况:</h3><p>问题分析：很有可能是代码编译出问题,运行的代码和源码不一致.</p><h3 id="执行sql，一直在执行中"><a href="#执行sql，一直在执行中" class="headerlink" title="执行sql，一直在执行中"></a>执行sql，一直在执行中</h3><p>问题分析：很可能是别的程序执行相关sql未提交导致</p><h3 id="打印出来的2个字符串一致，但判断相等却是不等？"><a href="#打印出来的2个字符串一致，但判断相等却是不等？" class="headerlink" title="打印出来的2个字符串一致，但判断相等却是不等？"></a>打印出来的2个字符串一致，但判断相等却是不等？</h3><p>问题分析:很可能是有字符串包含空格</p>]]></content>
-      
-      <categories>
-          
-          <category> 其他 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 问题 </tag>
             
         </tags>
       
